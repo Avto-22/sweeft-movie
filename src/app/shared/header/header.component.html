@@ -1,0 +1,64 @@
+<div #header class="header">
+  <div class="nav-bar">
+    <div class="nav-bar-items">
+      <div class="most">
+        <a
+          class="nav-bar-item"
+          [ngClass]="{
+            active:
+              !router.url.includes('favourite-movie') &&
+              (router.url.includes('page') ||
+                router.url.split('/')[1] == 'movie-list') && !router.url.includes('movie/')
+          }"
+          #mostWatch
+          (click)="goToMostWatched()"
+          >Most_Watched</a
+        >
+      </div>
+      <div class="fav" style="margin-left: 20px;">
+        <a
+          class="nav-bar-item"
+          [ngClass]="{
+            active:
+              router.url.includes('favourite-movie') &&
+              !router.url.includes('page')
+          }"
+          #favourite
+          (click)="goToFavourite()"
+          >Favourite</a
+        >
+      </div>
+    </div>
+    <div class="search">
+     
+      <img src="" alt="">
+      <form class="search-box" #form="ngForm">
+        <button
+          type="submit"
+          (click)="onSubmit(form.value.movieName)"
+          class="btn-search"
+        >
+          <img src="../../../assets/images/search.png" alt="" />
+        </button>
+        <input
+          type="text"
+          ngModel
+          name="movieName"
+          class="input-search"
+          placeholder="Type to Search..."
+          autocomplete="off"
+          #search
+        />
+      </form>
+    </div>
+    <div class="logout">
+      <button (click)="logOut()">log out</button>
+    </div>
+  </div>
+  <div #card class="search-result" [ngClass]="{'search-animation': findedMovies.length}" >
+    <div class="section-title" *ngIf="form.value.movieName">
+      {{ isMovieFinded ? '' : 'Movie Not Found' }}
+    </div>
+    <app-card (clearSearch)="closeSearch()"  [SearchMovies]="findedMovies" [isSearchmovies]="true" *ngIf="findedMovies.length"></app-card>
+  </div>
+</div>

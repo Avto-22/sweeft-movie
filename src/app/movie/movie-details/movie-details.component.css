@@ -1,0 +1,299 @@
+* {
+  color: white;
+  font-family: cursive;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  height: auto;
+  width: 90%;
+  padding: 10px;
+  margin: 200px auto;
+  background-color: rgba(0, 0, 0, 0.496);
+  -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+}
+
+.add-favorite {
+  display: flex;
+  justify-content: center;
+}
+
+.add-favorite button {
+  all: unset;
+  background-color: rgba(137, 43, 226, 0.749);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 30px 5px white;
+  transition: 0.5s;
+  animation-name: FavAnimation;
+  animation-duration: .5s;
+}
+
+.add-favorite .remove-fav{
+  color:black;
+  font-weight: bolder;
+}
+
+@keyframes FavAnimation{
+  100%{
+    transform: rotate(360deg)
+  }
+}
+
+.add-favorite button:hover {
+  transform: scale(1.1);
+}
+
+.card .body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card .thumbnail {
+  float: left;
+  height: auto;
+  width: auto;
+  transform: translateY(-100px);
+  overflow: hidden;
+}
+
+.card .thumbnail .img-info{
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.card .thumbnail .imdb{
+  border:3px solid gold;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.737);
+  color:white;
+  font-size: 1.1rem;
+}
+
+.card .thumbnail .runtime{
+  background-color: rgba(255, 255, 255, 0.725);
+  color: black;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bolder;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+.card img.left {
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card .right {
+  margin-left: 50px;
+  margin-right: 20px;
+  width: 50%;
+}
+
+.card .right .genre{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin:30px;
+}
+
+.card .right .genre p{
+  margin: 5px;
+  background-color: rgba(0, 255, 255, 0.742);
+  padding: 5px;
+  color:black;
+  border-radius: 10px;
+  font-weight: bolder;
+}
+
+.card h1 {
+  padding-top: 15px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.card h2 {
+  padding-top: 8px;
+  margin-right: 6px;
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+.card p {
+  text-align: justify;
+  padding-top: 10px;
+  font-size: 0.95rem;
+  line-height: 150%;
+}
+
+.card h5 {
+  position: absolute;
+  left: 30px;
+  bottom: -120px;
+  font-size: 6rem;
+  color: #c3c3c3;
+}
+
+.card h6 {
+  position: absolute;
+  left: 30px;
+  bottom: -55px;
+  font-size: 2rem;
+  color: #c3c3c3;
+}
+
+/* cast */
+
+.cast {
+  display: flex;
+  padding: 5px;
+  position: relative;
+  margin: 5px auto;
+  height: auto;
+  width: 95%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.cast::-webkit-scrollbar {
+  width: 12px;
+}
+
+.cast::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.cast::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.cast .actor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 300px;
+  margin: 25px;
+  padding-bottom: 40px;
+}
+
+.actor .actor-img {
+  width: auto;
+  height: 100%;
+  position: relative;
+}
+
+.actor .actor-img .character{
+  position:absolute;
+  top:0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: .5s;
+  flex-wrap: wrap;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.actor .actor-img .character .character-name{
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.actor .actor-img:hover .character{
+  opacity: 1;
+}
+
+.actor .actor-img img {
+  border-radius: 10px;
+  width: auto;
+  height: 100%;
+}
+
+.actor .actor-name {
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.btn {
+  all: unset;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.buttons button:nth-child(1) img{
+  transform: rotate(180deg);
+}
+
+
+.error{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
+.error p{
+  color:black;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  opacity: .7;
+  text-align: center;
+}
+
+@media(max-width:1284px){
+  .card .right{
+    width: 100%;
+    margin: 0px;
+  }
+
+  .card .right p{
+    text-align: center;
+  }
+
+  h5{
+    bottom: -260px !important;
+  }
+  h6{
+    bottom: -190px !important;
+  }
+
+  /* h6{
+    margin-top: -300px;
+    border: 2px solid black;
+  } */
+}

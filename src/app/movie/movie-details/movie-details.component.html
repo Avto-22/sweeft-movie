@@ -1,0 +1,57 @@
+<div class="main" *ngIf="!isMovieNotFound">
+  <div class="card" *ngIf="movie">
+    <div class="body">
+      <div class="thumbnail">
+        <img class="left" [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path"/>
+        <div class="img-info">
+          <div *ngIf="movie.vote_average" class="imdb">imdb: {{movie.vote_average | imdb}}</div>
+          <div *ngIf="movie.runtime" class="runtime">{{ movie.runtime | runtime}}</div>
+        </div>
+      </div>
+      <div class="right">
+        <h1>{{movie.title}}</h1>
+        <p style="font-size: 1.3rem;">{{movie.overview}}</p>
+        <div class="genre">
+          <p *ngFor="let genre of movie.genres">
+            {{genre.name}}
+          </p>
+        </div>
+        <div class="add-favorite">
+          <button (click)="addFavorite()" *ngIf="!isFavourite">
+            Add Favourite
+          </button>
+          <button class="remove-fav" (click)="removeFavourite()" *ngIf="isFavourite">
+            Remove Favourite
+          </button>
+        </div>
+        
+        <div class="cast"  #cast HorizontalScroll *ngIf="movie?.casts?.length">
+          <div class="actor" *ngFor="let actor of movie.casts">
+            <p class="actor-name">{{actor.name}}</p>
+            <div class="actor-img">
+              <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" loading="lazy" alt="">
+              <div class="character">
+                <p class="character-name">{{actor.character}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="movie?.casts?.length">
+          <button (click)="next()" class="btn"><img src="../../../assets/images/cast-btn.png" alt=""></button>
+          <button (click)="back()" class="btn"><img src="../../../assets/images/cast-btn.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+   
+      <h5 class="relase_date">{{movie.release_date.split('-')[0]}}</h5>
+      <h6 class="relase_date">{{movie.release_date.split('-')[2]}} {{movie.release_date.split('-')[1] | month}}</h6>
+    
+   
+  </div>
+</div>
+<div class="error" *ngIf="isMovieNotFound">
+  <p>{{errorText}}</p>
+  <p>404 ERROR</p>
+</div>
+
+

@@ -1,0 +1,393 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 150px;
+  margin-top: 25px;
+}
+
+.main::before {
+  content: "";
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  bottom: -50px;
+  left: -100px;
+  background-color: #aad227;
+  border-radius: 300px;
+}
+
+.main::after {
+  content: "";
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  bottom: -50px;
+  right: -100px;
+  background-color: #aad227;
+  border-radius: 300px;
+  z-index: -1;
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+  font-family: fantasy;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.container {
+  margin: 10px;
+  cursor: pointer;
+}
+.svg {
+  fill: rgba(128, 128, 128, 0.08);
+}
+
+.card {
+  position: relative;
+  width: 300px;
+  height: auto;
+  border-radius: 6px;
+  color: #aaa;
+  overflow: hidden;
+  transition: 0.1s;
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+.card__image-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin: 0px auto;
+
+}
+
+.card__line {
+  opacity: 0;
+  animation: LineFadeIn 0.8s 0.8s forwards ease-in;
+}
+
+.card__image {
+  opacity: 0;
+  animation: ImageFadeIn 0.8s 1.4s forwards;
+  width: 100%;
+  height: auto;
+}
+
+.card__title {
+  color: white;
+  margin: 0px auto;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-align: center;
+  height: auto;
+}
+
+.card__content {
+  /* margin-bottom: 2rem; */
+  height: auto;
+  opacity: 0;
+  animation: ContentFadeIn 0.8s 1.6s forwards;
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.card__svg {
+  position: absolute;
+  left: 0;
+  top: 115px;
+}
+
+/* button */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  animation: ImageFadeIn 0.8s 1.4s forwards;
+  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  /* opacity: 0; */
+}
+
+.center .imdb {
+  color: white;
+  background-color: rgba(9, 9, 9, 0.711);
+  padding: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid gold;
+  opacity: 0;
+  transition: 0.3s;
+  font-weight: bolder;
+  font-family: cursive;
+}
+
+.center .date{
+  opacity: 0;
+  color: white;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  font-family: cursive;
+  position: absolute;
+  top:10px;
+  left:10px;
+  background-color: rgba(255, 255, 255, 0.438);
+  border-radius: 10px;
+  border:3px solid black;
+  padding: 5px;
+}
+
+.center .genre{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  position: absolute;
+  bottom:20px;
+  left:0;
+  right: 0;
+}
+
+.center .genre p{
+  color:white;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  font-family: cursive;
+  margin:5px;
+}
+
+.btn {
+  opacity: 0;
+  width: 180px;
+  height: 60px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.741);
+  border: 1px solid #91c9ff;
+  outline: none;
+  transition: 0.5;
+  position: relative;
+}
+
+.btn svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover {
+  transition: 1s ease-in-out;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.card:hover .center {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.card:hover .center .genre, .card:hover .center .date,.card:hover .center .btn, .card:hover .center .imdb {
+  text-align: center;
+  animation-name: Card;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  opacity: 1;
+}
+
+@keyframes Card {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 415px) {
+  .card {
+    width: 60vw;
+    height: 320px;
+  }
+
+  .center {
+    left: -3px;
+  }
+
+  .btn {
+    width: 79vw;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn {
+    width: 85vw;
+  }
+}
+/* enx card */
+
+/* pagination start */
+.pagination {
+  margin: 5px auto;
+  display: flex;
+  justify-content: center;
+  animation-name: Pagination;
+  animation-duration: 1s;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.my-pagination ::ng-deep {
+  background-color: rgba(235, 235, 235, 0.7);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  border-radius: 100%;
+  background-color: #aad227;
+  color: black;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current :hover {
+  border-radius: 100%;
+}
+
+@keyframes Pagination {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* animation */
+@keyframes LineFadeIn {
+  0% {
+    opacity: 0;
+    d: path(
+      "M 0 300 Q 0 300 0 300 Q 0 300 0 300 C 0 300 0 300 0 300 Q 0 300 0 300 "
+    );
+    stroke: #fff;
+  }
+
+  50% {
+    opacity: 1;
+    d: path(
+      "M 0 300 Q 50 300 100 300 Q 250 300 350 300 C 350 300 500 300 650 300 Q 750 300 800 300"
+    );
+    stroke: #888bff;
+  }
+
+  100% {
+    opacity: 1;
+    d: path(
+      "M -2 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 802 400"
+    );
+    stroke: #545581;
+  }
+}
+
+@keyframes ContentFadeIn {
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ImageFadeIn {
+  0% {
+    transform: translate(-0.5rem, -0.5rem) scale(1.05);
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  50% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media(max-width: 366px){
+  .card__image{
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  .card{
+    box-shadow: none;
+  }
+
+}
+
+@media(max-width: 415px){
+
+  .btn{
+    width: 80%;
+  }
+
+  .center{
+    width: 105%;
+  }
+  
+}
+
+@media(max-width: 365px){
+  .imdb, .date{
+    width: 25%;
+    font-size: 10px !important;
+  }
+
+}
+
+@media(max-width:300px){
+  .card__line{
+    display: none;
+  }
+}
+

@@ -1,0 +1,76 @@
+<div class='card'>
+    <form [formGroup]='signInForm' id='sign-in' class='form' [ngClass]="{'bottom': isClicked, 'top':!isClicked}">
+     <div (click)='switch()' class='title' [ngClass]="{'title-border':isClicked}">
+        <h3>Sign In</h3>
+     </div>
+     <input formControlName='email' class='input' type='email' placeholder='E-Mail...'>
+     <input formControlName='password' id="signInpassword" class='input' type='password' placeholder='Password...'>
+     <div class="icon-view" id="sign-in-eye">
+      <img (click) ="eyeClick(false)" *ngIf='!isEyeOn' src="../../../assets/images/eye-on.png">
+      <img (click) ="eyeClick(false)" *ngIf='isEyeOn' src="../../../assets/images/eye-off.png">
+     </div>
+     <div class='error' *ngIf="signInForm.invalid && !passwordError; else invalidPassword">
+      <p *ngIf="signInForm.controls['email'].errors && signInForm.controls['password'].errors; else email">Email and Password <span>Warning</span></p>
+      <ng-template #email>
+        <p *ngIf="signInForm.controls['email'].errors; else password">Invalid Email <span> Warning</span></p>
+      </ng-template>
+      <ng-template #password>
+        <p>Password is <span >empty</span></p>
+      </ng-template>
+     </div>
+     <ng-template class='error' #invalidPassword>
+      <p *ngIf='passwordError'>Password is incorrect</p>
+    </ng-template>
+     <button type="submit" [ngClass]="{'disabled': signInForm.status == 'INVALID'}" [disabled]="signInForm.status == 'INVALID'" (click)="signIn({
+      email: signInForm.get('email').value,
+      password: signInForm.get('password').value
+     })" class='butt' >
+       <span *ngIf="signInForm.status == 'VALID'"></span>
+       <span *ngIf="signInForm.status == 'VALID'"></span>
+       <span *ngIf="signInForm.status == 'VALID'"></span>
+       <span *ngIf="signInForm.status == 'VALID'"></span>
+       Login
+    </button>
+    </form>
+    <form [formGroup]="signUpForm" id='sign-up' class='form' [ngClass]="{'bottom-sign-up': !isClicked, 'top-sign-up':isClicked}">
+       <div (click)='switch()' class='title' [ngClass]="{'title-border':!isClicked}">
+          <h3>Sign Up</h3>
+       </div>
+       <input formControlName='email' class='input' type='email' placeholder='E-Mail...'>
+       <input formControlName='password' id="up-pass" class='input' type='password' placeholder='Password...'>
+       <div class="icon-view" id="sign-up-eye">
+        <img (click) ="eyeClick(true,false)" *ngIf='!isUpEyeOn' src="../../assets/images/eye-on.png">
+        <img (click) ="eyeClick(true,false)" *ngIf='isUpEyeOn' src="../../assets/images/eye-off.png">
+       </div>
+       <input formControlName='repeatPassword' id="rep-pass" class='input' type='password' placeholder='Repeat Password...'>
+       <div class="icon-view" id="sign-up-rep-eye">
+        <img (click) ="eyeClick(true,true)" *ngIf='!isRepEyeOn' src="../../assets/images/eye-on.png">
+        <img (click) ="eyeClick(true,true)" *ngIf='isRepEyeOn' src="../../assets/images/eye-off.png">
+       </div>
+       <div class='error-up' *ngIf="signUpForm.invalid">
+        <p *ngIf="signUpForm.controls['email'].errors && signUpForm.controls['password'].errors && signUpForm.controls['repeatPassword'].errors; else upEmail">Email, Password and Repeat <span>Warning</span></p>
+        <ng-template #upEmail>
+          <p *ngIf="signUpForm.controls['email'].errors; else upPassword">Invalid Email <span> Warning</span></p>
+        </ng-template>
+        <ng-template #upPassword>
+          <p *ngIf="signUpForm.controls['password'].errors; else upRepeat">Password is <span >empty</span></p>
+        </ng-template>
+        <ng-template #upRepeat>
+          <p *ngIf="signUpForm.controls['repeatPassword'].errors; else passwordMatch">Repeat is <span >empty</span></p>
+        </ng-template>
+        <ng-template #passwordMatch>
+          <p *ngIf="signUpForm.errors['misMatch']">Passsword and Repeat <span> must be equal</span></p>
+        </ng-template>
+       </div>
+       <button class='butt' [ngClass]="{'disabled': signUpForm.status == 'INVALID'}" [disabled]="signUpForm.status == 'INVALID'" (click)="signUp({
+        email: signUpForm.get('email').value,
+        password: signUpForm.get('password').value
+       })">
+          <span *ngIf="signUpForm.status == 'VALID'"></span>
+          <span *ngIf="signUpForm.status == 'VALID'"></span>
+          <span *ngIf="signUpForm.status == 'VALID'"></span>
+          <span *ngIf="signUpForm.status == 'VALID'"></span>
+          Registration
+    </button>
+      </form>
+    </div>
