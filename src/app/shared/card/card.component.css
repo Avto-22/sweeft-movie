@@ -362,7 +362,6 @@ img {
   .card{
     box-shadow: none;
   }
-
 }
 
 @media(max-width: 415px){
@@ -375,6 +374,12 @@ img {
     width: 105%;
   }
   
+}
+
+@media(max-width:690px){
+  .main::before, .main::after{
+    display: none;
+  }
 }
 
 @media(max-width: 365px){

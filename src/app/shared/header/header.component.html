@@ -1,5 +1,10 @@
 <div #header class="header">
-  <div class="nav-bar">
+  <button class="burger-btn" (click)="burger()">
+    <p class="line" [ngClass]="{'line-1': isBurgerOpen}"></p>
+    <p class="line" [ngClass]="{'line-2': isBurgerOpen}"></p>
+    <p class="line" [ngClass]="{'line-3': isBurgerOpen}"></p>
+  </button>
+  <div class="nav-bar" [ngClass]="{'open-nav-bar': isBurgerOpen}">
     <div class="nav-bar-items">
       <div class="most">
         <a
@@ -30,8 +35,6 @@
       </div>
     </div>
     <div class="search">
-     
-      <img src="" alt="">
       <form class="search-box" #form="ngForm">
         <button
           type="submit"

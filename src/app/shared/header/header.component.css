@@ -1,25 +1,24 @@
 * {
   box-sizing: border-box;
   font-family: cursive;
-  color:white;
+  color: white;
 }
 
 .header {
-
   font-weight: bolder;
   font-size: 1.1rem;
   z-index: 2;
   background-color: #3b4263;
-  margin:-8px;
+  margin: -8px;
 }
 
-.nav-bar{
+.nav-bar {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.nav-bar-items{
+.nav-bar-items {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,25 +29,26 @@
   margin: 5px;
 }
 
-.logout button{
-  all:unset;
+.logout button {
+  all: unset;
   background-color: grey;
   border: 1px solid white;
   border-radius: 10px;
   padding: 10px;
   color: white;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.logout button:hover{
+.logout button:hover {
   background: linear-gradient(60deg, grey, white);
   color: black;
 }
 
-.most, .fav {
-  cursor:pointer;
-  margin:10px;
+.most,
+.fav {
+  cursor: pointer;
+  margin: 10px;
 }
 
 .seacrh {
@@ -122,28 +122,28 @@
   bottom: 0;
 }
 
-.search-result{
-  all:unset;
+.search-result {
+  all: unset;
   height: auto;
   max-height: 57vh;
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.search-animation{
-  animation: .4s Search linear;
+.search-animation {
+  animation: 0.4s Search linear;
 }
 
-@keyframes Search{
-  0%{
+@keyframes Search {
+  0% {
     height: 0px;
     overflow: hidden;
   }
 
-  100%{
+  100% {
     height: 57vh;
   }
 }
@@ -169,39 +169,110 @@
   font-size: 2rem;
 }
 
-
-.active{
-  background-color:gold;
-  color:black;
-  animation-name:Active;
-  animation-duration:1s;
+.active {
+  background-color: gold;
+  color: black;
+  animation-name: Active;
+  animation-duration: 1s;
   padding: 5px;
   border-radius: 10px;
 }
 
-.close-search{
+.close-search {
   animation-name: Close;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   height: 0px;
 }
 
-@keyframes Close{
-  0%{
+@keyframes Close {
+  0% {
     height: auto;
   }
-  50%{
+  50% {
     height: 57vh;
   }
-  100%{
+  100% {
     height: 0px;
   }
 }
 
-@media(max-width:690px){
-  .nav-bar{
+.burger-btn {
+  display: none;
+}
+
+.line{
+  width: 30px;
+  height: 3px;
+  background-color:antiquewhite;
+  margin: 5px;
+  border-radius: 10px;
+  transition: .5s;
+}
+
+.line-2{
+  transform: translateX(-1000px);
+}
+
+.line-1{
+  transform: rotate(45deg) translateY(10px) translateX(5px);
+}
+
+.line-3{
+  transform: rotate(-45deg) translateY(-10px) translateX(5px);
+}
+
+
+@media (max-width: 690px) {
+  .nav-bar {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+}
+
+@media (max-width: 500px) {
+  .nav-bar-items {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fav{
+    padding-top: 20px;
+  }
+
+  .nav-bar {
+    display: none;
+  }
+
+  .search {
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+
+  .logout {
+    padding-left: 20px;
+    padding-bottom: 10px;
+  }
+
+  .logout button{
+    padding: 10px;
+    margin-left: 5px;
+  }
+
+  .burger-btn{
+    all: unset;
+    color: black;
+    display: block;
+    padding: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .open-nav-bar {
+    display: block;
+    justify-content: center;
+    align-items: baseline;
+  }
+
 }

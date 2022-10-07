@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   unsubscribe: Subject<number> = new Subject<number>();
   findedMovies: MovieResult[] = [];
   isMovieFinded: boolean = true;
+  isBurgerOpen:boolean = false;
 
   @ViewChild('form', { static: true }) form: FormGroup;
   @ViewChild('mostWatch', { static: true }) mostWatchEl: ElementRef;
@@ -160,4 +161,9 @@ export class HeaderComponent implements OnInit, DoCheck {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((genres) => (this.genres = genres));
   }
+
+  burger(){
+    this.isBurgerOpen = !this.isBurgerOpen;
+  }
+  
 }
