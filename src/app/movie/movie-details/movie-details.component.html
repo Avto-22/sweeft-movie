@@ -7,8 +7,8 @@
           <div *ngIf="movie.vote_average" class="imdb">imdb: {{movie.vote_average | imdb}}</div>
           <div *ngIf="movie.runtime" class="runtime">{{ movie.runtime | runtime}}</div>
         </div>
-        <div class="trailer-btn">
-          <button (click)="playTrailer()"><img src="../../../assets/images/play.png" alt="play" title="play trailer"></button>
+        <div class="trailer-btn" *ngIf="movie.trailer_url">
+          <button><img src="../../../assets/images/play.png" alt="play" title="play trailer" (click)="playTrailer()"></button>
         </div>
       </div>
       <div class="right">
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<app-trailer *ngIf = "isTrailerPlayed" [trailerUrl] = "movie.trailer_url" (close)="closeTrailer()"></app-trailer>
+<app-trailer *ngIf = "isTrailerPlayed && movie.trailer_url" [trailerUrl] = "movie.trailer_url" (close)="closeTrailer()"></app-trailer>
 
 <div class="error" *ngIf="isMovieNotFound">
   <p>{{errorText}}</p>

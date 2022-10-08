@@ -105,9 +105,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
                   return of({
                     ...movie,
                     casts: cast.cast.filter((data) => data.profile_path),
-                    trailer_url:
-                      'https://www.youtube.com/embed/' +
-                      trailer_response.results[0].key,
+                    trailer_url:  trailer_response.results.length ? 'https://www.youtube.com/embed/' + trailer_response.results[0].key : '',
                   });
                 })
               );
