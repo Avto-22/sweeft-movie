@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
   constructor(
     private loading:LoadingService,
     private changeRef:ChangeDetectorRef,
-    public auth:AuthService
+    public auth:AuthService,
     ){}
 
   loading$!:Observable<boolean>;

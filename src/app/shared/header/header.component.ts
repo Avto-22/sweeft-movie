@@ -46,13 +46,20 @@ export class HeaderComponent implements OnInit, DoCheck {
     private authService: AuthService,
     private movieApi: MovieApiService,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {}
 
   ngOnInit(): void {
     this.outsideHeader();
     this.getGenre();
-  }
+
+    this.form.valueChanges.pipe(
+      takeUntil(this.unsubscribe)
+    ).subscribe(value=>{
+      this.search(value.movieName)
+    });
+
+  }    
 
   ngDoCheck(): void {
     of(this.form?.value.movieName)
@@ -128,11 +135,6 @@ export class HeaderComponent implements OnInit, DoCheck {
     } else {
       this.router.navigate(['movie-list']);
     }
-  }
-
-  onSubmit(movieName: string) {
-    this.renderer.removeClass(this.cardDiv.nativeElement, 'close-search');
-    this.search(movieName);
   }
 
   closeSearch() {
