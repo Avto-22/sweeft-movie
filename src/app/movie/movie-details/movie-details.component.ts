@@ -5,6 +5,7 @@ import { Movie, MovieResult, MovieAndCast} from '../movie-model';
 import {  of, Subject } from 'rxjs';
 import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -28,7 +29,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private movieApi: MovieApiService,
     private activatedRoute: ActivatedRoute,
-    private sweetAlert:SweetAlertService
+    private sweetAlert:SweetAlertService,
+    private authService:AuthService
   ) {}
 
   ngOnInit() {
@@ -49,8 +51,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getFullInfo(id?:number) {
+    let userUid = this.authService.getUserUid();
       let movieId:number;
-      let favMovies:MovieResult[] = JSON.parse(localStorage.getItem('favorites') || '[]');
+      let favMovies:MovieResult[] = JSON.parse(localStorage.getItem(`favorites_${userUid}`) || '[]');
       if(id){
         movieId = id;
       }else{
@@ -99,23 +102,24 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   addFavorite() {
+    let userUid= this.authService.getUserUid();
     this.isFavourite = true;
     let favorites: Movie[] = JSON.parse(
-      localStorage.getItem('favorites') || '[]'
+      localStorage.getItem(`favorites_${userUid}`) || '[]'
     );
 
     localStorage.setItem(
-      'favorites',
+      `favorites_${userUid}`,
       JSON.stringify([this.movie, ...favorites])
     );
-
     this.sweetAlert.addFav('Film added Successful');
   }
 
   removeFavourite(){
+    let userUid= this.authService.getUserUid();
     this.isFavourite=false;
-    let favorites:Movie[] = JSON.parse(localStorage.getItem('favorites') || '[]').filter(movie=>movie.id!=this.movie.id);
-    localStorage.setItem('favorites', JSON.stringify([...favorites]));
+    let favorites:Movie[] = JSON.parse(localStorage.getItem(`favorites_${userUid}`) || '[]').filter(movie=>movie.id!=this.movie.id);
+    localStorage.setItem(`favorites_${userUid}`, JSON.stringify([...favorites]));
     this.sweetAlert.addFav('Film removed Successful');
   }
 

@@ -34,6 +34,10 @@ export class AuthService {
     return !!this.user_;
   }
 
+  getUserUid(){
+    return this.user_.uid;
+  }
+
   signIn({ email, password }: UserIfo) {
     if (!email || !password) {
       return;

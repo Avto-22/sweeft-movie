@@ -34,12 +34,12 @@ export class AuthComponent implements OnInit {
   }
 
   signIn(user: UserIfo) {
-    console.log('SignIn loading...');
+    // console.log('SignIn loading...');
     this.authService.signIn(user);
   }
 
   signUp(user: UserIfo) {
-    console.log('SignUp loading...');
+    // console.log('SignUp loading...');
     this.authService.signUp(user);
   }
 
