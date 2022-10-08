@@ -96,6 +96,42 @@
   font-size: 1.1rem;
 }
 
+.card .thumbnail .trailer-btn{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items:flex-start;
+}
+
+.card .thumbnail .trailer-btn button{
+  all:unset;
+  padding: 10px;
+  border-radius: 10px;
+  /* border: 1px solid green; */
+  color: white;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  /* background-color: rgba(255, 255, 255,1); */
+  /* width: 50px; */
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card .thumbnail .trailer-btn button img{
+  width:25%;
+  margin-left: 3px;
+  height: auto;
+}
+
 .card img.left {
   height: auto;
   width: 100%;
@@ -256,6 +292,16 @@
   transform: rotate(180deg);
 }
 
+@keyframes Trailer{
+  0%{
+    transform: scale(0);
+    border-radius: 100%;
+  }
+  100%{
+    transform: scale(1);
+    border-radius: 100%;
+  }
+}
 
 .error{
   display: flex;
@@ -271,9 +317,11 @@
   color:black;
   font-weight: bolder;
   font-size: 1.5rem;
-  opacity: .7;
+  opacity: .3;
   text-align: center;
+
 }
+
 
 @media(max-width:1284px){
   .card .right{
@@ -285,15 +333,19 @@
     text-align: center;
   }
 
+  .card .thumbnail .trailer-btn{
+    align-items: stretch;
+  }
+
+  .card .thumbnail .trailer-btn button{
+    background-color:rgba(240, 248, 255, 0);
+    border: none;
+  }
+
   h5{
     bottom: -260px !important;
   }
   h6{
     bottom: -190px !important;
   }
-
-  /* h6{
-    margin-top: -300px;
-    border: 2px solid black;
-  } */
 }

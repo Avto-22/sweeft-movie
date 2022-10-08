@@ -1,0 +1,7 @@
+<div class="trailer" #trailer_div>
+    <div class="close-trailer">
+      <img src="../../../assets/images/close.png" alt="close" title="close trailer" (click)="closeTrailer()">
+    </div>
+    <iframe #video_div class="video" [src]="trailerUrl | safe" frameborder="0" allowfullscreen>
+    </iframe>
+  </div>

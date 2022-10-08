@@ -1,0 +1,36 @@
+.trailer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.950);
+  /* animation: Trailer .3s linear; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trailer .close-trailer{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  padding-top: 15px;
+  justify-content: center;
+}
+
+.trailer .close-trailer img{
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.trailer .video{
+    all: unset;
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+  }
+  

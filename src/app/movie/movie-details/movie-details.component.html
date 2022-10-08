@@ -7,6 +7,9 @@
           <div *ngIf="movie.vote_average" class="imdb">imdb: {{movie.vote_average | imdb}}</div>
           <div *ngIf="movie.runtime" class="runtime">{{ movie.runtime | runtime}}</div>
         </div>
+        <div class="trailer-btn">
+          <button (click)="playTrailer()"><img src="../../../assets/images/play.png" alt="play" title="play trailer"></button>
+        </div>
       </div>
       <div class="right">
         <h1>{{movie.title}}</h1>
@@ -42,13 +45,13 @@
         </div>
       </div>
     </div>
-   
       <h5 class="relase_date">{{movie.release_date.split('-')[0]}}</h5>
       <h6 class="relase_date">{{movie.release_date.split('-')[2]}} {{movie.release_date.split('-')[1] | month}}</h6>
-    
-   
   </div>
 </div>
+
+<app-trailer *ngIf = "isTrailerPlayed" [trailerUrl] = "movie.trailer_url" (close)="closeTrailer()"></app-trailer>
+
 <div class="error" *ngIf="isMovieNotFound">
   <p>{{errorText}}</p>
   <p>404 ERROR</p>

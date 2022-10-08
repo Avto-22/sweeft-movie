@@ -56,13 +56,17 @@ export interface CastBody {
   cast: Cast[];
 }
 
+export interface Trailer{
+  results: {key:string}[]
+}
+
 export interface Cast {
   character: string;
   name: string;
   profile_path: string;
 }
 
-export type MovieAndCast = Movie & { casts: Cast[] };
+export type MovieDeatil = Movie & { casts: Cast[], trailer_url:string };
 
 export type MovieResultAndGenre = {
     movie_results: MovieResult[];

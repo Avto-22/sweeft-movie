@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   @ViewChild('header', { static: true }) headerDiv: ElementRef;
   @ViewChild('card', { static: true }) cardDiv: ElementRef;
-  @ViewChild('search', { static: false }) searchDiv: ElementRef;
+  @ViewChild('search', { static: true }) searchDiv: ElementRef;
 
   constructor(
     private eventBusService: EventBusService,

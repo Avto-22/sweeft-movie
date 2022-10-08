@@ -11,6 +11,8 @@ import { FavouriteMovieComponent } from './favourite-movie/favourite-movie.compo
 import { SharedModule } from '../shared/shared.module';
 import { MonthPipe } from './movie-details/pipes/month.pipe';
 import { RuntimePipe } from './movie-details/pipes/runtime.pipe';
+import { SafePipe } from './movie-details/pipes/safe.pipe';
+import { TrailerComponent } from './movie-details/trailer/trailer.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,7 @@ import { RuntimePipe } from './movie-details/pipes/runtime.pipe';
     MovieRoutingModule,
     SharedModule
   ],
-  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe],
+  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent],
   providers: [MovieApiService, {
     provide: BASE_URL,
     useValue: environment.baseUrl

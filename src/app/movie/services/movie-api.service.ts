@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MovieBody, Movie, CastBody, Genres } from '../movie-model';
+import { MovieBody, Movie, CastBody, Genres, Trailer } from '../movie-model';
 
 export const BASE_URL = new InjectionToken<string>('api url');
 export const API_KEY = new InjectionToken<string>('api key');
@@ -35,6 +35,10 @@ export class MovieApiService {
 
   getMovieGenres():Observable<Genres>{
     return this.http.get<Genres>(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`);
+  }
+
+  getMovieTrailer(movieId:number): Observable<Trailer>{
+    return this.http.get<Trailer>(`${this.baseUrl}movie/${movieId}/videos?api_key=${this.apiKey}&language=en-US`)
   }
 
 }

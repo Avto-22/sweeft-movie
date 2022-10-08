@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieResult } from './movie/movie-model';
