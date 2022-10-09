@@ -9,6 +9,7 @@ import { CardComponent } from './card/card.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { ImdbPipe } from './card/imdb.pipe';
+import { ScrollingTopDirective } from './header/scrolling-top.directive';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ImdbPipe } from './card/imdb.pipe';
     FormsModule,
     NgxPaginationModule,
   ],
-  declarations: [SharedComponent,LoadingComponent, HeaderComponent, CardComponent, ScrollTopComponent, ImdbPipe],
+  declarations: [SharedComponent,LoadingComponent, HeaderComponent, CardComponent, ScrollTopComponent, ImdbPipe, ScrollingTopDirective],
   providers: [AuthService],
   exports: [LoadingComponent, HeaderComponent, CardComponent, ScrollTopComponent, ImdbPipe],
  

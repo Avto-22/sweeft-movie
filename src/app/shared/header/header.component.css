@@ -222,6 +222,23 @@
   transform: rotate(-45deg) translateY(-10px) translateX(5px);
 }
 
+.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  animation: Header .5s linear;
+}
+
+@keyframes Header{
+  0%{
+    transform: translateY(-100px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
 
 @media (max-width: 690px) {
   .nav-bar {
