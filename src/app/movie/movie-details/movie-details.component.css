@@ -207,6 +207,7 @@
   width: 95%;
   overflow-x: scroll;
   overflow-y: hidden;
+  cursor: grab;
 }
 
 .cast::-webkit-scrollbar {
@@ -251,7 +252,7 @@
   opacity: 0;
   transition: .5s;
   flex-wrap: wrap;
-  cursor: pointer;
+  cursor: grab;
   border-radius: 10px;
 }
 
@@ -320,6 +321,10 @@
   opacity: .3;
   text-align: center;
 
+}
+
+.active-cast{
+  transform: scale(1.1);
 }
 
 
