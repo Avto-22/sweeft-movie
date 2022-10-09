@@ -3,7 +3,6 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { MovieApiService } from '../services/movie-api.service';
@@ -39,8 +38,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private sweetAlert: SweetAlertService,
     private authService: AuthService,
-    private renderer:Renderer2
   ) {}
+
 
   ngOnInit() {
     document.body.style.backgroundColor = '#1e81b0';
@@ -61,8 +60,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
-  getFullInfo(id?: number) {
-    let userUid = this.authService.getUserUid();
+  async getFullInfo(id?: number) {
+    let userUid:string;
+    await this.authService?.getUserUid().then(res=>{
+      userUid = res
+    });
     let movieId: number;
     let favMovies: MovieResult[] = JSON.parse(
       localStorage.getItem(`favorites_${userUid}`) || '[]'
@@ -130,8 +132,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       );
   }
 
-  addFavorite() {
-    let userUid = this.authService.getUserUid();
+  async addFavorite() {
+    let userUid:string;
+    await this.authService.getUserUid().then(res=>{
+      userUid = res;
+    });
     this.isFavourite = true;
     let favorites: Movie[] = JSON.parse(
       localStorage.getItem(`favorites_${userUid}`) || '[]'
@@ -144,8 +149,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.sweetAlert.addFav('Film added Successful');
   }
 
-  removeFavourite() {
-    let userUid = this.authService.getUserUid();
+  async removeFavourite() {
+    let userUid:string;
+    await this.authService.getUserUid().then(res=>{
+      userUid = res;
+    });
     this.isFavourite = false;
     let favorites: Movie[] = JSON.parse(
       localStorage.getItem(`favorites_${userUid}`) || '[]'

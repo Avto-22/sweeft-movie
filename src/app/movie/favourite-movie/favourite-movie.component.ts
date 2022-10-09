@@ -8,7 +8,7 @@ import { Movie } from '../movie-model';
   styleUrls: ['./favourite-movie.component.css']
 })
 export class FavouriteMovieComponent implements OnInit {
-  movie!:Movie[];
+  movies!:Movie[];
 
   constructor(
     private authService:AuthService
@@ -16,8 +16,15 @@ export class FavouriteMovieComponent implements OnInit {
 
   ngOnInit(): void {
     document.body.style.backgroundColor='#1e81b0';
-    this.movie = JSON.parse(localStorage.getItem(`favorites_${this.authService.getUserUid()}`) || '[]');
+    this.getMovies();
   }
 
+  async getMovies(){
+    let uid:string;
+    await this.authService.getUserUid().then(res=>{
+      uid = res
+    });
+    this.movies = JSON.parse(localStorage.getItem(`favorites_${uid}`) || '[]');
+  }
 
 }

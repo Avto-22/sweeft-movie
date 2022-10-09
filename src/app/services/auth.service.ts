@@ -3,39 +3,42 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { SweetAlertService } from './sweet-alert.service';
 
-export interface UserIfo{
-  email:string;
-  password:string;
+export interface UserIfo {
+  email: string;
+  password: string;
 }
 
-export interface User{
-  uid:string;
-  email:string;
+export interface User {
+  uid: string;
+  email: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
-  private user_:User;
+  private user_: User;
 
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
-    private sweetAlert:SweetAlertService
+    private sweetAlert: SweetAlertService
   ) {
-    this.auth.onAuthStateChanged(user=>{
+    this.auth.onAuthStateChanged((user) => {
       this.user_ = user;
-    })
+    });
   }
 
-  get isUserLogged(){
+  get isUserLogged() {
     return !!this.user_;
   }
 
-  getUserUid(){
-    return this.user_.uid;
+  async getUserUid() {
+    let uid:string;
+    await this.auth.onAuthStateChanged((user) => {
+     uid= user?.uid;
+    });
+    return uid;
   }
 
   signIn({ email, password }: UserIfo) {
@@ -46,7 +49,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(
         () => {
-          this.router.navigate(['movie-list'],{queryParams:{ page:1 }});
+          this.router.navigate(['movie-list'], { queryParams: { page: 1 } });
         },
         (error) => {
           throw 'User not found';
@@ -54,7 +57,7 @@ export class AuthService {
       )
       .catch((error) => {
         this.sweetAlert.authError(error);
-      })
+      });
   }
 
   signUp({ email, password }: UserIfo) {
@@ -73,7 +76,7 @@ export class AuthService {
       )
       .catch((error) => {
         this.sweetAlert.authError(error);
-      })
+      });
   }
 
   signOut() {
