@@ -208,6 +208,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   cursor: grab;
+  transition: .5s;
 }
 
 .cast::-webkit-scrollbar {
