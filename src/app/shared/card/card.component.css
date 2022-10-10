@@ -2,9 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   padding: 10px;
   margin-bottom: 150px;
-  margin-top: 25px;
+  margin-top: 55px;
 }
 
 .main::before {

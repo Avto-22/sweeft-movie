@@ -5,10 +5,10 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.950);
-  /* animation: Trailer .3s linear; */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 3;
 }
 
 .trailer .close-trailer{
