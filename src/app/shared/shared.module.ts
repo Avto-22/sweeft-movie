@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { CardComponent } from './card/card.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
-import { ImdbPipe } from './card/imdb.pipe';
+import { ImdbPipe } from './pipes/imdb.pipe';
 import { ScrollingTopDirective } from './header/scrolling-top.directive';
 
 @NgModule({

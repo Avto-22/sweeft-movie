@@ -9,9 +9,9 @@ import { HorizontalScrollDirective } from './movie-details/horizontal-scroll.dir
 import { MostWatchedMovieListComponent } from './most-watched-movie-list/most-watched-movie-list.component';
 import { FavouriteMovieComponent } from './favourite-movie/favourite-movie.component';
 import { SharedModule } from '../shared/shared.module';
-import { MonthPipe } from './movie-details/pipes/month.pipe';
-import { RuntimePipe } from './movie-details/pipes/runtime.pipe';
-import { SafePipe } from './movie-details/pipes/safe.pipe';
+import { MonthPipe } from '../shared/pipes/month.pipe';
+import { RuntimePipe } from '../shared/pipes/runtime.pipe';
+import { SafePipe } from '../shared/pipes/safe.pipe';
 import { TrailerComponent } from './movie-details/trailer/trailer.component';
 
 @NgModule({

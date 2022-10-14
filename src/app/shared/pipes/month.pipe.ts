@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Month } from '../../movie-model';
+import { Month } from '../../movie/movie-model';
 
 @Pipe({
   name: 'month'
