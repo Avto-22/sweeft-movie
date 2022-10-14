@@ -8,7 +8,7 @@
   margin-top: 55px;
 }
 
-.main::before {
+/* .main::before {
   content: "";
   width: 300px;
   height: 300px;
@@ -17,6 +17,7 @@
   left: -100px;
   background-color: #aad227;
   border-radius: 300px;
+  z-index: -5;
 }
 
 .main::after {
@@ -28,8 +29,8 @@
   right: -100px;
   background-color: #aad227;
   border-radius: 300px;
-  z-index: -1;
-}
+  z-index: -5;
+} */
 
 .title {
   text-align: center;

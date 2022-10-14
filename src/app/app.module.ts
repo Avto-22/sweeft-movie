@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,13 @@ import { AngularFireModule } from '@angular/fire/compat';
     SharedModule,
     AuthModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    StoreModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge:25, // ბოლო 25 state
+      logOnly: environment.production, // მხოლოდ პროდაქშენის დროს
+      autoPause:true // დააპაუზოს ექშენების და სტეიტების ცვლილებების ჩაწერა, როცა ექსთენშენის ფანჯარა გახსნილი არ იქნება
+    })
   ],
   providers: [
     {

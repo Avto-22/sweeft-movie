@@ -1,5 +1,5 @@
-<div class="main" *ngIf="!isMovieNotFound">
-  <div class="card" *ngIf="movie">
+<div class="main" *ngIf="!facadeService.isMovieNotFound">
+  <div class="card" *ngIf="movie$ | async as movie">
     <div class="body">
       <div class="thumbnail">
         <img class="left" [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path"/>
@@ -8,7 +8,7 @@
           <div *ngIf="movie.runtime" class="runtime">{{ movie.runtime | runtime}}</div>
         </div>
         <div class="trailer-btn" *ngIf="movie.trailer_url">
-          <button><img src="../../../assets/images/play.png" alt="play" title="play trailer" (click)="playTrailer()"></button>
+          <button><img src="../../../assets/images/play.png" alt="play" title="play trailer" (click)="utility.playTrailer()"></button>
         </div>
       </div>
       <div class="right">
@@ -20,10 +20,10 @@
           </p>
         </div>
         <div class="add-favorite">
-          <button (click)="addFavorite()" *ngIf="!isFavourite">
+          <button (click)="facadeService.addFavorite()" *ngIf="!facadeService.isFavourite">
             Add Favourite
           </button>
-          <button class="remove-fav" (click)="removeFavourite()" *ngIf="isFavourite">
+          <button class="remove-fav" (click)="facadeService.removeFavourite()" *ngIf="facadeService.isFavourite">
             Remove Favourite
           </button>
         </div>
@@ -49,11 +49,12 @@
       <h6 class="relase_date">{{movie.release_date.split('-')[2]}} {{movie.release_date.split('-')[1] | month}}</h6>
   </div>
 </div>
+<div class="pagin" *ngIf="movie$ | async as movie">
+  <app-trailer *ngIf = "utility.isTrailerPlayed && movie.trailer_url" [trailerUrl] = "movie.trailer_url" (close)="utility.closeTrailer()"></app-trailer>
+</div>
 
-<app-trailer *ngIf = "isTrailerPlayed && movie.trailer_url" [trailerUrl] = "movie.trailer_url" (close)="closeTrailer()"></app-trailer>
-
-<div class="error" *ngIf="isMovieNotFound">
-  <p>{{errorText}}</p>
+<div class="error" *ngIf="facadeService.isMovieNotFound">
+  <p>{{facadeService.errorText}}</p>
   <p>404 ERROR</p>
 </div>
 

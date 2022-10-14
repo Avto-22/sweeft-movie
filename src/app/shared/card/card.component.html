@@ -1,4 +1,4 @@
-<div class="main" *ngIf="MostWatchedmovies.length && isMostWatchedMovie">
+<div class="main" *ngIf="MostWatchedmovies?.length && isMostWatchedMovie">
     <div class="container" *ngFor="let movie of MostWatchedmovies | paginate : { currentPage:page, itemsPerPage:20, totalItems:4000 }">
       <div class="card">
          <div class="card__image-container">

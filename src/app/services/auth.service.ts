@@ -18,6 +18,12 @@ export interface User {
 })
 export class AuthService {
   private user_: User;
+  name: string = 'avto';
+
+  setName(): Promise<string>{
+    
+    return Promise.resolve('avto');
+  }
 
   constructor(
     private auth: AngularFireAuth,

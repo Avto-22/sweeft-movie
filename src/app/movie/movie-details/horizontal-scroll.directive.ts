@@ -12,7 +12,9 @@ import { Directive, ElementRef, HostListener, Renderer2 } from "@angular/core";
     constructor(
       private element: ElementRef,
       private renderer:Renderer2
-      ) {}
+      ) {
+        this.element.nativeElement.style.fontWeight = 'bold';
+      }
   
     @HostListener("wheel", ["$event"])
     onScroll(event: WheelEvent) {

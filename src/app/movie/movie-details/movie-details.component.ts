@@ -5,13 +5,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { MovieApiService } from '../services/movie-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { Movie, MovieResult, MovieDeatil } from '../movie-model';
-import { of, Subject } from 'rxjs';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
-import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { MovieDeatil } from '../movie-model';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { utility } from './utility';
+import { MovieDetailsFacadeService } from './services/movie-details-facade.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -19,40 +19,24 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./movie-details.component.css'],
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy {
-  movie!: MovieDeatil;
-  isMovieNotFound: boolean;
-  isTrailerPlayed: boolean;
 
-  isFavourite: boolean;
-  errorText: string;
+  utility = utility;
 
-  favorites: Movie[] = JSON.parse(localStorage.getItem('favorites') || '[]');
+  movie$:Observable<MovieDeatil>;
 
   @ViewChild('cast') cast: ElementRef;
-
 
   unsubscribe$: Subject<number> = new Subject<number>();
 
   constructor(
-    private movieApi: MovieApiService,
     private activatedRoute: ActivatedRoute,
-    private sweetAlert: SweetAlertService,
+    public facadeService:MovieDetailsFacadeService,
     private authService: AuthService,
-  ) {}
-
+  ) { }
 
   ngOnInit() {
     document.body.style.backgroundColor = '#1e81b0';
-    this.activatedRoute.paramMap
-      .pipe(
-        map((params) => params.get('id')),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe((movieId) => {
-        if (movieId) {
-          this.getFullInfo(+movieId);
-        }
-      });
+    this.getMovie();
   }
 
   ngOnDestroy(): void {
@@ -60,109 +44,20 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
-  async getFullInfo(id?: number) {
+  async getMovie(){
     let userUid:string;
-    await this.authService?.getUserUid().then(res=>{
+     await this.authService?.getUserUid().then(res=>{
       userUid = res
     });
-    let movieId: number;
-    let favMovies: MovieResult[] = JSON.parse(
-      localStorage.getItem(`favorites_${userUid}`) || '[]'
-    );
-    if (id) {
-      movieId = id;
-    } else {
-      movieId = this.activatedRoute.snapshot.params['id'];
-    }
-    this.movieApi
-      .getMovieById(movieId)
-      .pipe(
-        map((movie) => {
-          /* api-დან წამოღებული ფილმების შემოწმება არის თუ არა რომელიმე  უკვე მომხმარებლის მიერ ფავორიტი, და თუ არის დაამატებს ობიექტს შესაბამის პროპერთის true მნიშვნელობით,
-          რასაც გამოვიყენებ შემდეგ დეტალების გვედზე ფავორიტების დამატების და წაშლის ღილაკების გამოსაჩენად*/
-          for (let i = 0; i < favMovies.length; i++) {
-            if (movie.id == favMovies[i].id) {
-              movie = {
-                ...movie,
-                isFavorite: true,
-              };
-            }
-          }
-          return movie;
-        }),
-        switchMap((movie) => {
-          // ახალ observable-ზე გადაყვანა და MovieAndCast ტიპის გამოყვანა
-          return this.movieApi.getMovieCast(movie.id).pipe(
-            catchError(()=> of({
-              cast: []
-            })),
-            switchMap((cast) => {
-              return this.movieApi.getMovieTrailer(movie.id).pipe(
-                catchError(() =>
-                  of({
-                   results:[]
-                  })
-                ),
-                switchMap((trailer_response) => {
-                  return of({
-                    ...movie,
-                    casts: cast.cast.filter((data) => data.profile_path),
-                    trailer_url:  trailer_response.results.length ? 'https://www.youtube.com/embed/' + trailer_response.results[0].key : '',
-                  });
-                })
-              );
-            })
-          );
-        }),
-        catchError((error) => {
-          throw 'movie not found';
-        }),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe(
-        (movie) => {
-          this.movie = movie;
-          this.isFavourite = Boolean(this.movie.isFavorite);
-        },
 
-        (error) => {
-          this.isMovieNotFound = true;
-          this.errorText = error;
-        }
-      );
-  }
-
-  async addFavorite() {
-    let userUid:string;
-    await this.authService.getUserUid().then(res=>{
-      userUid = res;
-    });
-    this.isFavourite = true;
-    let favorites: Movie[] = JSON.parse(
-      localStorage.getItem(`favorites_${userUid}`) || '[]'
-    );
-
-    localStorage.setItem(
-      `favorites_${userUid}`,
-      JSON.stringify([this.movie, ...favorites])
-    );
-    this.sweetAlert.addFav('Film added Successful');
-  }
-
-  async removeFavourite() {
-    let userUid:string;
-    await this.authService.getUserUid().then(res=>{
-      userUid = res;
-    });
-    this.isFavourite = false;
-    let favorites: Movie[] = JSON.parse(
-      localStorage.getItem(`favorites_${userUid}`) || '[]'
-    ).filter((movie) => movie.id != this.movie.id);
-    localStorage.setItem(
-      `favorites_${userUid}`,
-      JSON.stringify([...favorites])
-    );
-    this.sweetAlert.addFav('Film removed Successful');
+    this.movie$ = this.activatedRoute.paramMap
+    .pipe(
+      map((params) => params.get('id')),
+      switchMap(movieId=>{
+        return this.facadeService.getFullInfo(parseInt(movieId),userUid)
+      }),
+      takeUntil(this.unsubscribe$),
+    )
   }
 
   next() {
@@ -171,22 +66,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   back() {
     this.cast.nativeElement.scrollLeft -= 200;
-  }
-
-  playTrailer() {
-    this.isTrailerPlayed = true;
-    window.onscroll = function () {
-      // disable window scroll
-      window.scrollTo(
-        window.pageYOffset || document.documentElement.scrollTop,
-        window.pageXOffset || document.documentElement.scrollLeft
-      );
-    };
-  }
-
-  closeTrailer() {
-    this.isTrailerPlayed = false;
-    window.onscroll = function () {}; // undisable window scroll
   }
 
 }

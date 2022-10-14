@@ -1,1 +1,1 @@
-<app-card [MostWatchedmovies]="movies" [page]="page" [isMostWatchedMovie]="true"></app-card>
+<app-card [MostWatchedmovies]="movies$ | async" [page]="facadeService.page" [isMostWatchedMovie]="true"></app-card>
