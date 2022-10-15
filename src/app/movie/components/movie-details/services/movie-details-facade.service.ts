@@ -3,8 +3,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { Movie, MovieDeatil, MovieResult } from '../../movie-model';
-import { MovieApiService } from '../../services/movie-api.service';
+import { Movie, MovieDeatil, MovieResult } from '../../../movie-model';
+import { MovieApiService } from '../../../services/movie-api.service';
 
 @Injectable({
   providedIn: 'root',

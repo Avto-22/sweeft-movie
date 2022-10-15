@@ -6,8 +6,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Genre, Movie, MovieResult } from '../../movie/movie-model';
-import { MovieApiService } from '../../movie/services/movie-api.service';
+import { Genre, Movie, MovieResult } from '../../../movie/movie-model';
+import { MovieApiService } from '../../../movie/services/movie-api.service';
 
 @Component({
   selector: 'app-card',

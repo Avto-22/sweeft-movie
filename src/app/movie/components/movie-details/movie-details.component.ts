@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieDeatil } from '../movie-model';
+import { MovieDeatil } from '../../movie-model';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';

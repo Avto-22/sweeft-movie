@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { MovieResult } from '../movie-model';
+import { MovieResult } from '../../movie-model';
 import { MostWatchedFacadeService } from './services/most-watched-facade.service';
 
 @Component({

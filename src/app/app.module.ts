@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundModule } from './not-found/not-found.module';
-import { LoadingInterceptor } from './shared/loading/loading-interceptor';
+import { LoadingInterceptor } from './shared/components/loading/loading-interceptor';
 import { SharedModule } from './shared/shared.module';
 import {
   API_KEY,

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, map, switchMap, tap } from 'rxjs';
 import { EventBusService } from 'src/app/services/event-bus.service';
-import { MovieBody, MovieResult } from '../../movie-model';
-import { MovieApiService } from '../../services/movie-api.service';
+import { MovieBody, MovieResult } from '../../../movie-model';
+import { MovieApiService } from '../../../services/movie-api.service';
 
 @Injectable({
   providedIn: 'root'
