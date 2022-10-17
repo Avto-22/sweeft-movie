@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { Movie, MovieDeatil, MovieResult } from '../../../movie-model';
+import { Movie, MovieDetail, MovieResult } from '../../../movie-model';
 import { MovieApiService } from '../../../services/movie-api.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { MovieApiService } from '../../../services/movie-api.service';
 export class MovieDetailsFacadeService {
   isFavourite: boolean;
 
-  movie!: MovieDeatil;
+  movie!: MovieDetail;
 
   isMovieNotFound: boolean;
 
@@ -26,7 +26,7 @@ export class MovieDetailsFacadeService {
     private authService:AuthService
   ) {}
 
-  getFullInfo(id: number, userUid: string): Observable<MovieDeatil> {
+  getFullInfo(id: number, userUid: string): Observable<MovieDetail> {
     let favMovies: MovieResult[] = JSON.parse(
       localStorage.getItem(`favorites_${userUid}`) || '[]'
     );

@@ -8,8 +8,11 @@
   font-weight: bolder;
   font-size: 1.1rem;
   z-index: 2;
-  background-color: #3b4263;
+  background-color: #3b426394;
   margin: -8px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
 }
 
 .nav-bar {

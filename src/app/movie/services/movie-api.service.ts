@@ -22,7 +22,7 @@ export class MovieApiService {
   }
 
   getMovieById(movieId:number): Observable<Movie>{
-    return this.http.get<Movie>(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.apiKey}&language=en-US`);
+    return this.http.get<Movie>(`${this.baseUrl}movie/${movieId}?api_key=${this.apiKey}&language=en-US`);
   }
 
   searchMovieByName(movieName:string):Observable<MovieBody>{
