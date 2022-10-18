@@ -1,0 +1,1 @@
+export * as MovieSelector  from './movie.selectors';

@@ -6,6 +6,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { MovieActions } from 'src/app/store/actions';
 import { Genre, Movie, MovieResult } from '../../../movie/movie-model';
 import { MovieApiService } from '../../../movie/services/movie-api.service';
 
@@ -30,7 +32,8 @@ export class CardComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private movieApi: MovieApiService
+    private movieApi: MovieApiService,
+    // private store:Store
   ) {}
 
   ngOnInit(): void {
@@ -51,9 +54,10 @@ export class CardComponent implements OnInit {
       },
       relativeTo: this.route,
     });
-    this.movieApi
-      .getMovieListByPageName(page)
-      .subscribe((data) => (this.MostWatchedmovies = data.results));
+    // this.store.dispatch(MovieActions.getMostWatchedMovies())
+    // this.movieApi
+    //   .getMovieListByPageName(page)
+    //   .subscribe((data) => (this.MostWatchedmovies = data.results));
   }
 
   goToDetails(movieId: number) {

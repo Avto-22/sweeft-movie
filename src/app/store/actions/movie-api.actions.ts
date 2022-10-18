@@ -4,7 +4,7 @@ import { MovieDetail, MovieResult } from "src/app/movie/movie-model";
 // ------------ Start Most watched Movies
 export const getMostWatchedMoviesSuccessful = createAction(
     '[Most_Watched] get movies successful',
-    props<{movieResult:MovieResult[]}>()
+    props<{movieResult:MovieResult[], page:number}>()
 );
 
 export const getMostWatchedMoviesFailed = createAction(

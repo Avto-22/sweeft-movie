@@ -18,6 +18,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { movieReducer } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { MovieEffects } from './store/effects/movie.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,12 +33,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AuthModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    StoreModule.forRoot([]),
+
+    StoreModule.forRoot({movies: movieReducer}),
+    EffectsModule.forRoot([MovieEffects]),
     StoreDevtoolsModule.instrument({
       maxAge:25, // ბოლო 25 state
       logOnly: environment.production, // მხოლოდ პროდაქშენის დროს
       autoPause:true // დააპაუზოს ექშენების და სტეიტების ცვლილებების ჩაწერა, როცა ექსთენშენის ფანჯარა გახსნილი არ იქნება
-    })
+    }),
+
   ],
   providers: [
     {

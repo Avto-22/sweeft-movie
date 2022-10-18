@@ -3,12 +3,11 @@ import { MovieDetail } from "src/app/movie/movie-model";
 
 export const getMostWatchedMovies = createAction(
     '[Most_Watched] get movies',
-    props<{page:number}>()
 );
 
 export const getMovieDetals = createAction(
     "[Movie Details] get movie's detail",
-    props<{id:number}>()
+    props<{id:number, uid:string}>()
 );
 
 export const getFavMovies = createAction(
@@ -23,7 +22,7 @@ export const addFavMovie = createAction(
 
 export const removeFavMovie = createAction(
     '[Movie Details] remove favMovie',
-    props<{key:string, movieId:number}>()
+    props<{movieId:number}>()
 );
 
 export const redirectToMostWatchedMoviesPage = createAction(

@@ -23,7 +23,7 @@ export interface MovieResult {
 export interface Movie {
   backdrop_path: string;
   budget: number;
-  genres: Genre[];
+  genres?: Genre[];
   id: number;
   imdb_id: string;
   original_title: string;
@@ -32,7 +32,7 @@ export interface Movie {
   poster_path: string;
   release_date: string;
   runtime: number;
-  spoken_languages: Language[];
+  spoken_languages?: Language[];
   status: string;
   title: string;
   vote_average: number;
@@ -66,7 +66,7 @@ export interface Cast {
   profile_path: string;
 }
 
-export type MovieDetail = Movie & { casts: Cast[], trailer_url:string };
+export type MovieDetail = Movie & { casts?: Cast[], trailer_url:string };
 
 export type MovieResultAndGenre = {
     movie_results: MovieResult[];

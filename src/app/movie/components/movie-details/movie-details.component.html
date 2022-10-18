@@ -1,5 +1,5 @@
-<div class="main" *ngIf="!facadeService.isMovieNotFound">
-  <div class="card" *ngIf="movie$ | async as movie">
+<div class="main" *ngIf="!facadeService.isMovieNotFound && movie$ | async as movie ">
+  <div class="card" *ngIf="movie.title">
     <div class="body">
       <div class="thumbnail">
         <img class="left" [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path"/>

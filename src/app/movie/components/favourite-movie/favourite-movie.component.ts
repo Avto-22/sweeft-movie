@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { MovieActions } from 'src/app/store/actions';
+import { MovieSelector } from 'src/app/store/selectors';
 import { Movie } from '../../movie-model';
 
 @Component({
@@ -8,10 +12,11 @@ import { Movie } from '../../movie-model';
   styleUrls: ['./favourite-movie.component.css']
 })
 export class FavouriteMovieComponent implements OnInit {
-  movies!:Movie[];
+  movies$:Observable<Movie[]> = this.store.select(MovieSelector.selectFavMovies);
 
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private store:Store
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +29,8 @@ export class FavouriteMovieComponent implements OnInit {
     await this.authService.getUserUid().then(res=>{
       uid = res
     });
-    this.movies = JSON.parse(localStorage.getItem(`favorites_${uid}`) || '[]');
+    this.store.dispatch(MovieActions.getFavMovies({key: `favorites_${uid}`}))
+    // this.movies$ = JSON.parse(localStorage.getItem(`favorites_${uid}`) || '[]');
   }
 
 }

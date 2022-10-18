@@ -5,12 +5,13 @@ import { MovieState } from "../state";
 const initialState: MovieState={
     mostWatcedMovies: [],
     favMovies: [],
-    movieDetail: {},
     isMostWatchedMoviesPage:false,
     isFavMoviesPage:false,
     isFavMovie:false,
     isNotFavMovie:false,
-    error:''
+    error:'',
+    loading:false,
+    page:1
 }
 
 export const movieReducer = createReducer(
@@ -20,20 +21,23 @@ export const movieReducer = createReducer(
     on(MovieActions.getMostWatchedMovies, (state)=>{
         return {
             ...state,
+            loading:true
         }
     }),
 
-    on(MovieApiActions.getMostWatchedMoviesSuccessful, (state, {movieResult})=>{
+    on(MovieApiActions.getMostWatchedMoviesSuccessful, (state, {movieResult, page})=>{
         return {
             ...state,
             mostWatcedMovies: movieResult,
+            page,
             loading: false
         }
     }),
 
     on(MovieApiActions.getMostWatchedMoviesFailed, (state, {error})=>{
         return {
-            ...state, 
+            ...state,
+            loading:false,
             error
         }
     }),  // -----------------------------------------------------
@@ -45,20 +49,23 @@ export const movieReducer = createReducer(
     on(MovieActions.getMovieDetals, (state)=>{
         return {
             ...state,
+            loading:true
         }
     }),
 
     on(MovieApiActions.getMovieDetalsSuccessful, (state, {movie})=>{
         return {
             ...state,
-            movieDetail: movie
+            movieDetail: movie,
+            loading:false
         }
     }),
 
     on(MovieApiActions.getMovieDetalsFailed, (state, {error})=>{
         return {
             ...state,
-           error,
+            loading:false,
+           error
         }
     }), // ----------------------------------------
 
@@ -72,7 +79,7 @@ export const movieReducer = createReducer(
         };
     }),
 
-    on(MovieActions.removeFavMovie, (state, {key, movieId})=>{
+    on(MovieActions.removeFavMovie, (state, {movieId})=>{
         return {
             ...state,
             favMovies: state.favMovies.filter(movie=> movie.id != movieId)

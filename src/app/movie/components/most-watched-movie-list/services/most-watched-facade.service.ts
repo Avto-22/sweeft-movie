@@ -9,7 +9,7 @@ import { MovieApiService } from '../../../services/movie-api.service';
   providedIn: 'root'
 })
 export class MostWatchedFacadeService {
-  page: number = 1;
+  page: number = 22;
 
   get mostWatchedMovies$(){
     return this.route.queryParams
