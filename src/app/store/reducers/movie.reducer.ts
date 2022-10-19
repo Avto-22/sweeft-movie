@@ -1,4 +1,4 @@
-import { createReducer, on, State } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { Movie, MovieDetail } from 'src/app/movie/movie-model';
 import { MovieActions, MovieApiActions } from '../actions';
 import { MovieState } from '../state';
@@ -7,7 +7,7 @@ import { EMPTY_MOVIE_DETAILS } from '../util/empty types';
 const initialState: MovieState = {
   mostWatcedMovies: [],
   favMovies: [],
-  genres:[],
+  genres: [],
   isMostWatchedMoviesPage: false,
   isFavMoviesPage: false,
   isFavMovie: false,
@@ -17,6 +17,8 @@ const initialState: MovieState = {
   loading: false,
   page: 1,
   movieDetail: EMPTY_MOVIE_DETAILS,
+  isSearchedMovieFinded: true,
+  findedMovies: [],
 };
 
 export const movieReducer = createReducer(
@@ -73,7 +75,7 @@ export const movieReducer = createReducer(
   on(MovieApiActions.getMovieDetalsFailed, (state, { error }) => {
     return {
       ...state,
-        movieDetail: EMPTY_MOVIE_DETAILS,
+      movieDetail: EMPTY_MOVIE_DETAILS,
       loading: false,
       error,
       isMovieNotFound: true,
@@ -81,31 +83,29 @@ export const movieReducer = createReducer(
     };
   }), // ----------------------------------------
 
-
-//   ------------------------------------------------
-  on(MovieActions.getGenres, (state)=>{
+  //   ------------------------------------------------
+  on(MovieActions.getGenres, (state) => {
     return {
-        ...state,
-        loading: true
-    }
+      ...state,
+      loading: true,
+    };
   }),
 
-  on(MovieApiActions.getGenresSuccessful, (state, {genres})=>{
+  on(MovieApiActions.getGenresSuccessful, (state, { genres }) => {
     return {
-        ...state,
-        genres,
-        loading:false
-    }
+      ...state,
+      genres,
+      loading: false,
+    };
   }),
 
-  on(MovieApiActions.getGenresFailed, (state, {error})=>{
+  on(MovieApiActions.getGenresFailed, (state, { error }) => {
     return {
-        ...state,
-        loading: false,
-        error
-    }
+      ...state,
+      loading: false,
+      error,
+    };
   }), //   --------------------------------------------
-
 
   // -----------------------------------
   on(MovieActions.addFavMovie, (state, { uid }) => {
@@ -142,12 +142,45 @@ export const movieReducer = createReducer(
       ...state,
       favMovies: JSON.parse(localStorage.getItem(key)),
     };
+  }), // ----------------------
+
+
+  // ----------------------------------
+  on(MovieActions.getSearchedMovies, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
   }),
 
-  // ----------------------
+  on(MovieApiActions.getSearchedMoviesSuccessful, (state, { searchResult }) => {
+    return {
+      ...state,
+      loading: false,
+      findedMovies: searchResult,
+      isSearchedMovieFinded: true,
+    };
+  }),
+
+  on(MovieApiActions.getSearchedMoviesFailed, (state) => {
+    return {
+      ...state,
+      loading: false,
+      findedMovies: [],
+      isSearchedMovieFinded: false,
+    };
+  }),
+
+  on(MovieActions.clearSearchedMovies, (state)=>{
+    return {
+        ...state,
+        findedMovies: []
+    }
+  }), // ---------------------------
 
 
-//   ----------------------------
+
+  //   ----------------------------
   on(MovieActions.clearAllState, (state) => {
     return {
       mostWatcedMovies: [],
@@ -163,8 +196,10 @@ export const movieReducer = createReducer(
       page: 1,
       movieDetail: {
         ...EMPTY_MOVIE_DETAILS,
-        isMovieNotFound: state.isMovieNotFound
-    },
+        isMovieNotFound: state.isMovieNotFound,
+      },
+      isSearchedMovieFinded: true,
+      findedMovies: [],
     };
   })
 );

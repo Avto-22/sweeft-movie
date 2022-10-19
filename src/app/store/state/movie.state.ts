@@ -1,4 +1,4 @@
-import { Genre, Genres, MovieDetail, MovieResult } from "src/app/movie/movie-model";
+import { Genre, MovieDetail, MovieResult } from "src/app/movie/movie-model";
 
 export interface MovieState {
     mostWatcedMovies: MovieResult[];
@@ -12,5 +12,7 @@ export interface MovieState {
     error:string;
     loading:boolean;
     page:number;
-    genres: Genre[]
+    genres: Genre[];
+    isSearchedMovieFinded: boolean;
+    findedMovies: MovieResult[];
 }

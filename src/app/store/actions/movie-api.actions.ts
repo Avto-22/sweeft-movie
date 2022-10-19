@@ -28,6 +28,8 @@ export const getMovieDetalsFailed = createAction(
 // ---------------- End Movie's detail
 
 
+
+// ---------------------------- Start Genres
 export const getGenresSuccessful =  createAction(
     '[header] get Genres successful',
     props<{genres: Genre[]}>()
@@ -36,4 +38,16 @@ export const getGenresSuccessful =  createAction(
 export const getGenresFailed =  createAction(
     '[header] get Genres failed',
     props<{error: string}>()
+); // ------------------------------------ End Genres
+
+
+
+// ---------------------------------------- Start searched Movies
+export const getSearchedMoviesSuccessful =  createAction(
+    '[header] get searched Movies successful',
+    props<{searchResult: MovieResult[]}>()
 );
+
+export const getSearchedMoviesFailed =  createAction(
+    '[header] get searched Movies failed'
+); // ------------------------------------- End searched Movies

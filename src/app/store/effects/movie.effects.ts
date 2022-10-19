@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { MovieActions, MovieApiActions } from '../actions';
-import { GenresClass, MostWatchedMoviesFn } from '../util';
+import { GenresClass, MostWatchedMoviesFn, SearchedMovies } from '../util';
 import { MovieDetailsFn } from '../util/movie-api-functions/movie-details.fn';
 
 @Injectable()
@@ -14,7 +14,8 @@ export class MovieEffects {
     private mostWatchedMoviesFn: MostWatchedMoviesFn,
     private movieDetailsFn: MovieDetailsFn,
     private genresClass: GenresClass,
-    private router: Router
+    private router: Router,
+    private sarchedMovies: SearchedMovies
   ) {}
 
   getMostWatchedMovies$ = createEffect(() => {
@@ -76,4 +77,22 @@ export class MovieEffects {
       })
     );
   });
+
+  getSearchedMovies$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MovieActions.getSearchedMovies),
+      mergeMap(({ movieName }) => {
+          return this.sarchedMovies.search(movieName);
+      }),
+      map((movies) => {
+        return MovieApiActions.getSearchedMoviesSuccessful({
+          searchResult: movies,
+        });
+      }),
+      catchError(() => {
+        return of(MovieApiActions.getSearchedMoviesFailed());
+      })
+    );
+  });
+  
 }

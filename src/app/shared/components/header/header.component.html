@@ -56,10 +56,10 @@
       <button (click)="logOut()">log out</button>
     </div>
   </div>
-  <div #card class="search-result" [ngClass]="{'search-animation': findedMovies.length}" >
-    <div class="section-title" *ngIf="form.value.movieName">
-      {{ isMovieFinded ? '' : 'Movie Not Found' }}
+  <div *ngIf="findedMovies$ | async as findedMovies">
+    <div *ngIf="findedMovies.length"  #card class="search-result" [ngClass]="{'search-animation': findedMovies.length}" >
+      <app-card (clearSearch)="closeSearch()"  [SearchMovies]="findedMovies" [isSearchmovies]="true" *ngIf="findedMovies.length"></app-card>
     </div>
-    <app-card (clearSearch)="closeSearch()"  [SearchMovies]="findedMovies" [isSearchmovies]="true" *ngIf="findedMovies.length"></app-card>
   </div>
+ 
 </div>

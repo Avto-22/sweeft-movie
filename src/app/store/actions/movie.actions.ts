@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { MovieDetail } from "src/app/movie/movie-model";
 
 export const getMostWatchedMovies = createAction(
     '[Most_Watched] get movies',
@@ -31,4 +30,13 @@ export const clearAllState = createAction(
 
 export const getGenres = createAction(
     '[header] get Genres'
-)
+);
+
+export const getSearchedMovies = createAction(
+    '[header] get searched Movies',
+    props<{movieName:string}>()
+);
+
+export const clearSearchedMovies = createAction(
+    '[header] clear searched movies'
+);
