@@ -7,9 +7,10 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { MovieActions } from 'src/app/store/actions';
+import { MovieSelector } from 'src/app/store/selectors';
 import { Genre, Movie, MovieResult } from '../../../movie/movie-model';
-import { MovieApiService } from '../../../movie/services/movie-api.service';
 
 @Component({
   selector: 'app-card',
@@ -27,23 +28,16 @@ export class CardComponent implements OnInit {
 
   @Output() clearSearch: EventEmitter<void> = new EventEmitter<void>();
 
-  genres: Genre[];
+  genres$: Observable<Genre[]> = this.store.select(MovieSelector.selectGenres);
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private movieApi: MovieApiService,
-    // private store:Store
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.getGenre();
-  }
-
-  getGenre() {
-    this.movieApi
-      .getMovieGenres()
-      .subscribe((res) => (this.genres = res.genres));
+   this.store.dispatch(MovieActions.getGenres());
   }
 
   pagination(page: number) {
@@ -54,10 +48,6 @@ export class CardComponent implements OnInit {
       },
       relativeTo: this.route,
     });
-    // this.store.dispatch(MovieActions.getMostWatchedMovies())
-    // this.movieApi
-    //   .getMovieListByPageName(page)
-    //   .subscribe((data) => (this.MostWatchedmovies = data.results));
   }
 
   goToDetails(movieId: number) {

@@ -13,8 +13,9 @@ import { EventBusService } from 'src/app/services/event-bus.service';
 import { Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovieApiService } from 'src/app/movie/services/movie-api.service';
-import { Genres, MovieResult } from 'src/app/movie/movie-model';
+import { MovieResult } from 'src/app/movie/movie-model';
 import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
@@ -26,11 +27,12 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   activeUrl!: string;
   page: Observable<number>;
-  genres: Genres;
   unsubscribe: Subject<number> = new Subject<number>();
   findedMovies: MovieResult[] = [];
   isMovieFinded: boolean = true;
   isBurgerOpen:boolean = false;
+
+
 
   @ViewChild('form', { static: true }) form: FormGroup;
   @ViewChild('mostWatch', { static: true }) mostWatchEl: ElementRef;
@@ -47,11 +49,11 @@ export class HeaderComponent implements OnInit, DoCheck {
     private movieApi: MovieApiService,
     private route: ActivatedRoute,
     private renderer: Renderer2,
+    private store:Store
   ) {}
 
   ngOnInit(): void {
     this.outsideHeader();
-    this.getGenre();
 
     this.form.valueChanges.pipe(
       takeUntil(this.unsubscribe)
@@ -126,6 +128,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   goToMostWatched() {
+
     if (this.eventBusService.page) {
       this.router.navigate(['movie-list'], {
         queryParams: {
@@ -155,13 +158,6 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   goToFavourite() {
     this.router.navigate(['/movie-list/favourite-movie']);
-  }
-
-  getGenre() {
-    this.movieApi
-      .getMovieGenres()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((genres) => (this.genres = genres));
   }
 
   burger(){

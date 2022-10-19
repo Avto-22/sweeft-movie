@@ -20,7 +20,7 @@
           <div *ngIf="movie.release_date" class="date">{{movie.release_date.split('-')[0]}} Jahr</div>
           <div class="genre">
             <div *ngFor="let movie_genre of movie.genre_ids">
-              <p *ngFor="let genre of genres">
+              <p *ngFor="let genre of (genres$ | async)">
                 {{ genre.id == movie_genre ? genre.name : '' }}
               </p>
             </div>
@@ -80,7 +80,7 @@
           <div *ngIf="movie.release_date" class="date">{{movie.release_date.split('-')[0]}} Jahr</div>
           <div class="genre">
             <div *ngFor="let movie_genre of movie.genre_ids">
-              <p *ngFor="let genre of genres">
+              <p *ngFor="let genre of (genres$ | async)">
                 {{ genre.id == movie_genre ? genre.name : '' }}
               </p>
             </div>

@@ -33,11 +33,6 @@ export const selectIsFavMovie = createSelector(
     (state: MovieState) => state.isFavMovie
 );       
 
-export const selectIsNotFavMovie = createSelector(
-    selectMovie,
-    (state: MovieState) => state.isNotFavMovie
-)
-
 export const selectError = createSelector(
     selectMovie,
     (state: MovieState) => state.error
@@ -51,5 +46,20 @@ export const selectLoading = createSelector(
 export const selectPage = createSelector(
     selectMovie,
     (state: MovieState) => state.page
-)
+);
+
+export const selectIsMovieNotFound = createSelector(
+    selectMovie,
+    (state: MovieState) => state.isMovieNotFound
+);
+
+export const selectMovieNotFoundText = createSelector(
+    selectMovie,
+    (state: MovieState) => state.MovieNotFoundText
+);
+
+export const selectGenres = createSelector(
+    selectMovie,
+    (state: MovieState) => state.genres
+);
 

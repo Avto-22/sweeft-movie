@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, PreloadAllModules, Route} from '@angular/router';
+import { RouterModule, Route} from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
 
 const routes: Route[] = [

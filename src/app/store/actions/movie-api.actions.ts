@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { MovieDetail, MovieResult } from "src/app/movie/movie-model";
+import { Genre, MovieDetail, MovieResult } from "src/app/movie/movie-model";
 
 // ------------ Start Most watched Movies
 export const getMostWatchedMoviesSuccessful = createAction(
@@ -26,3 +26,14 @@ export const getMovieDetalsFailed = createAction(
     props<{error:string}>()
 );
 // ---------------- End Movie's detail
+
+
+export const getGenresSuccessful =  createAction(
+    '[header] get Genres successful',
+    props<{genres: Genre[]}>()
+);
+
+export const getGenresFailed =  createAction(
+    '[header] get Genres failed',
+    props<{error: string}>()
+);

@@ -1,2 +1,2 @@
-<app-card [FavMovies]="movies$ | async" [isFavMovies]="true"></app-card>
+<app-card  *ngIf="(movies$ | async).length != 0" [FavMovies]="movies$ | async" [isFavMovies]="true"></app-card>
 <div class="no-favourite" *ngIf="!(movies$ | async).length">You have not Favouritemovies</div>

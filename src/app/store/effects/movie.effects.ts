@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { MovieApiService } from 'src/app/movie/services/movie-api.service';
 import { MovieActions, MovieApiActions } from '../actions';
-import { MostWatchedMoviesFn } from '../util';
+import { GenresClass, MostWatchedMoviesFn } from '../util';
 import { MovieDetailsFn } from '../util/movie-api-functions/movie-details.fn';
 
 @Injectable()
@@ -14,6 +13,7 @@ export class MovieEffects {
     private actions$: Actions,
     private mostWatchedMoviesFn: MostWatchedMoviesFn,
     private movieDetailsFn: MovieDetailsFn,
+    private genresClass: GenresClass,
     private router: Router
   ) {}
 
@@ -25,7 +25,7 @@ export class MovieEffects {
           map((movies) => {
             return MovieApiActions.getMostWatchedMoviesSuccessful({
               movieResult: movies,
-              page: this.mostWatchedMoviesFn.page
+              page: this.mostWatchedMoviesFn.page,
             });
           }),
           catchError((error: HttpErrorResponse) => {
@@ -42,19 +42,38 @@ export class MovieEffects {
   });
 
   getMovieDetail$ = createEffect(() => {
-      return this.actions$.pipe(
-          ofType(MovieActions.getMovieDetals),
-          mergeMap(({id, uid}) => {
-              return this.movieDetailsFn.getFullInfo$(id, uid)
-          }),
-          map(movie => {
-            return MovieApiActions.getMovieDetalsSuccessful({movie})
-          }),
-          catchError((error:HttpErrorResponse) =>{
-            return of(MovieApiActions.getMovieDetalsFailed({               
-                error: `Failed to get MostWatchedMovies!: Server responded witch: ${error}`
-            }))
+    return this.actions$.pipe(
+      ofType(MovieActions.getMovieDetals),
+      mergeMap(({ id, uid }) => {
+        return this.movieDetailsFn.getFullInfo$(id, uid);
+      }),
+      map((movie) => {
+        if (movie.isMovieNotFound) {
+          return MovieApiActions.getMovieDetalsFailed({
+            error: 'movie not found',
+          });
+        }
+        return MovieApiActions.getMovieDetalsSuccessful({ movie });
+      })
+    );
+  });
+
+  getGenres$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MovieActions.getGenres),
+      mergeMap(() => {
+        return this.genresClass.getGenres();
+      }),
+      map((genres) => {
+        return MovieApiActions.getGenresSuccessful({ genres });
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(
+          MovieApiActions.getGenresFailed({
+            error: `Failed to get Genres!: Server responded witch: ${error}`,
           })
-      )
-  })
+        );
+      })
+    );
+  });
 }

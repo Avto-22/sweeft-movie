@@ -17,18 +17,18 @@ export const getFavMovies = createAction(
 
 export const addFavMovie = createAction(
     '[Movie Details] add favMovie',
-    props<{movie: MovieDetail, uid:string}>()
+    props<{uid:string}>()
 )
 
 export const removeFavMovie = createAction(
     '[Movie Details] remove favMovie',
-    props<{movieId:number}>()
+    props<{uid:string}>()
 );
 
-export const redirectToMostWatchedMoviesPage = createAction(
-    '[] redirect to MostWatchedPage'
+export const clearAllState = createAction(
+    'clear all state'
 );
 
-export const redirectToFavMoviesPage = createAction(
-    '[] redirect to FavMovies'
-);
+export const getGenres = createAction(
+    '[header] get Genres'
+)

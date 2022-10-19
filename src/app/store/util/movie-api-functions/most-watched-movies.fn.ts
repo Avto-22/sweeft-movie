@@ -45,10 +45,6 @@ export class MostWatchedMoviesFn{
           tap(()=>{
             this.eventBusService.setPage(this.page);
           }),
-        //   catchError((error: HttpErrorResponse)=>{
-        //     this.router.navigate([error]);
-        //     return of(MovieApiActions.getMostWatchedMoviesFailed({error: `Failed to get MostWatchedMovies!: Server responded witch: ${error}`}))
-        //   })
         )
     }
   

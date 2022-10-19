@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NotFoundModule } from './not-found/not-found.module';
-import { LoadingInterceptor } from './shared/components/loading/loading-interceptor';
 import { SharedModule } from './shared/shared.module';
 import {
   API_KEY,
@@ -44,11 +43,6 @@ import { MovieEffects } from './store/effects/movie.effects';
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true,
-    },
     MovieApiService,
     {
       provide: BASE_URL,

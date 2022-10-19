@@ -66,7 +66,7 @@ export interface Cast {
   profile_path: string;
 }
 
-export type MovieDetail = Movie & { casts?: Cast[], trailer_url:string };
+export type MovieDetail = Movie & { casts?: Cast[], trailer_url:string, isMovieNotFound?:boolean };
 
 export type MovieResultAndGenre = {
     movie_results: MovieResult[];

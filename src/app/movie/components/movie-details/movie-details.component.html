@@ -1,4 +1,4 @@
-<div class="main" *ngIf="!facadeService.isMovieNotFound && movie$ | async as movie ">
+<div class="main" *ngIf="!(isMovieNotFound$ | async) && movie$ | async as movie ">
   <div class="card" *ngIf="movie.title">
     <div class="body">
       <div class="thumbnail">
@@ -20,10 +20,10 @@
           </p>
         </div>
         <div class="add-favorite">
-          <button (click)="facadeService.addFavorite()" *ngIf="!facadeService.isFavourite">
+          <button (click)="facadeService.addFavorite()" *ngIf="!(isFavMovie$ | async)">
             Add Favourite
           </button>
-          <button class="remove-fav" (click)="facadeService.removeFavourite()" *ngIf="facadeService.isFavourite">
+          <button class="remove-fav" (click)="facadeService.removeFavourite()" *ngIf="isFavMovie$ | async">
             Remove Favourite
           </button>
         </div>
@@ -53,8 +53,8 @@
   <app-trailer *ngIf = "utility.isTrailerPlayed && movie.trailer_url" [trailerUrl] = "movie.trailer_url" (close)="utility.closeTrailer()"></app-trailer>
 </div>
 
-<div class="error" *ngIf="facadeService.isMovieNotFound">
-  <p>{{facadeService.errorText}}</p>
+<div class="error" *ngIf="isMovieNotFound$ | async">
+  <p>{{movieNotFoundText$ | async}}</p>
   <p>404 ERROR</p>
 </div>
 

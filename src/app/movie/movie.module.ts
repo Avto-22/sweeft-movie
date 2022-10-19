@@ -21,14 +21,15 @@ import { TrailerComponent } from './components/movie-details/trailer/trailer.com
     SharedModule
   ],
   declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent],
-  providers: [MovieApiService, {
-    provide: BASE_URL,
-    useValue: environment.baseUrl
-  },
-  {
-    provide: API_KEY,
-    useValue: environment.apiKey
-  }
+  providers: [
+  //   MovieApiService, {
+  //   provide: BASE_URL,
+  //   useValue: environment.baseUrl
+  // },
+  // {
+  //   provide: API_KEY,
+  //   useValue: environment.apiKey
+  // }
 ]
 })
 export class MovieModule { }

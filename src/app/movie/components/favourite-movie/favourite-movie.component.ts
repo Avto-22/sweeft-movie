@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +11,7 @@ import { Movie } from '../../movie-model';
   templateUrl: './favourite-movie.component.html',
   styleUrls: ['./favourite-movie.component.css']
 })
-export class FavouriteMovieComponent implements OnInit {
+export class FavouriteMovieComponent implements OnInit, OnDestroy {
   movies$:Observable<Movie[]> = this.store.select(MovieSelector.selectFavMovies);
 
   constructor(
@@ -24,13 +24,16 @@ export class FavouriteMovieComponent implements OnInit {
     this.getMovies();
   }
 
+  ngOnDestroy(): void {
+    this.store.dispatch(MovieActions.clearAllState());
+  }
+
   async getMovies(){
     let uid:string;
     await this.authService.getUserUid().then(res=>{
       uid = res
     });
-    this.store.dispatch(MovieActions.getFavMovies({key: `favorites_${uid}`}))
-    // this.movies$ = JSON.parse(localStorage.getItem(`favorites_${uid}`) || '[]');
+    this.store.dispatch(MovieActions.getFavMovies({key: `favmovies_${uid}`}))
   }
 
 }
