@@ -111,7 +111,7 @@ export const movieReducer = createReducer(
   on(MovieActions.addFavMovie, (state, { uid }) => {
     let favorites: Movie[] = JSON.parse(
       localStorage.getItem(`favmovies_${uid}`)
-    );
+    ) || [];
 
     localStorage.setItem(
       `favmovies_${uid}`,

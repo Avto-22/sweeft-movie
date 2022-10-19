@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AuthService, UserIfo } from 'src/app/services/auth.service';
+import { MovieActions } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +24,7 @@ export class AuthComponent implements OnInit {
 
   isRepEyeOn: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private store: Store) {}
 
   ngOnInit() {
     document.body.style.backgroundImage =
@@ -31,7 +33,10 @@ export class AuthComponent implements OnInit {
     document.body.style.backgroundRepeat = 'repeat';
     this.createSignInForm();
     this.createSignUpForm();
+
+    this.store.dispatch(MovieActions.clearAllState())
   }
+
 
   signIn(user: UserIfo) {
     this.authService.signIn(user);
