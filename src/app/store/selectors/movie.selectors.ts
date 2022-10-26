@@ -73,3 +73,13 @@ export const selectIsMovieFinded = createSelector(
     selectMovie,
     (state: MovieState) => state.isSearchedMovieFinded
 );
+
+export const selectSideBarCollections = createSelector(
+    selectMovie,
+    (state: MovieState) => state.SidebarCollections
+);
+
+export const selectCollection = createSelector(
+    selectMovie,
+    (state: MovieState) => state.collection
+);

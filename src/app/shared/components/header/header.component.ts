@@ -105,6 +105,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/movie-list/favourite-movie']);
   }
 
+  goToCollections(){
+    this.router.navigate(['movie-list/collections']);
+  }
+
   burger() {
     this.isBurgerOpen = !this.isBurgerOpen;
   }

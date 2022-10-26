@@ -1,0 +1,7 @@
+<div class="main">
+    <div class="collection" *ngFor="let collection of collections$ | async">
+            <img (click)="goToCollectionDetail(collection.collectionId)" src="https://image.tmdb.org/t/p/w500{{collection.poster}}" alt="">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+    </div>
+</div>

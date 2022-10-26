@@ -52,6 +52,8 @@ import { MovieEffects } from './store/effects/movie.effects';
       provide: API_KEY,
       useValue: environment.apiKey,
     },
+    
+
   ],
   bootstrap: [AppComponent],
 })

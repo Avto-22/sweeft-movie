@@ -4,8 +4,19 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { MovieActions, MovieApiActions } from '../actions';
-import { GenresClass, MostWatchedMoviesFn, SearchedMovies } from '../util';
+import {
+  CollectionDetail,
+  GenresClass,
+  MostWatchedMoviesFn,
+  SearchedMovies,
+  SidebarCollections,
+} from '../util';
 import { MovieDetailsFn } from '../util/movie-api-functions/movie-details.fn';
+
+const COLLECTIONS_ID: number[] = [
+  945, 937, 748, 735, 656, 645, 556, 529, 528, 495, 456, 432, 420, 399, 328,
+  304, 295, 264, 263, 230, 151, 131, 119, 84, 10,
+];
 
 @Injectable()
 export class MovieEffects {
@@ -15,7 +26,9 @@ export class MovieEffects {
     private movieDetailsFn: MovieDetailsFn,
     private genresClass: GenresClass,
     private router: Router,
-    private sarchedMovies: SearchedMovies
+    private sarchedMovies: SearchedMovies,
+    private sidebarCollections: SidebarCollections,
+    private collectionDetail: CollectionDetail
   ) {}
 
   getMostWatchedMovies$ = createEffect(() => {
@@ -82,7 +95,7 @@ export class MovieEffects {
     return this.actions$.pipe(
       ofType(MovieActions.getSearchedMovies),
       mergeMap(({ movieName }) => {
-          return this.sarchedMovies.search(movieName);
+        return this.sarchedMovies.search(movieName);
       }),
       map((movies) => {
         return MovieApiActions.getSearchedMoviesSuccessful({
@@ -94,5 +107,42 @@ export class MovieEffects {
       })
     );
   });
-  
+
+  getCollections$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MovieActions.getSideBarCollection),
+      mergeMap(() => {
+        return this.sidebarCollections.getSideBarCollection(COLLECTIONS_ID);
+      }),
+      map((collections) => {
+        return MovieApiActions.getSideBarCollectionSuccessful({ collections });
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(
+          MovieApiActions.getSideBarCollectionFailed({
+            error: `Failed to get Genres!: Server responded witch: ${error}`,
+          })
+        );
+      })
+    );
+  });
+
+  getCollectionDetail = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MovieActions.getCollectionDetail),
+      mergeMap(({ collectionId }) => {
+        return this.collectionDetail.getCollectionDetail(collectionId);
+      }),
+      map((collection) => {
+        return MovieApiActions.getCollectionDetailSuccessful({ collection });
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(
+          MovieApiActions.getCollectionDetailFailed({
+            error: `Failed to get Genres!: Server responded witch: ${error}`,
+          })
+        );
+      })
+    );
+  });
 }

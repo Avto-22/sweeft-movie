@@ -52,7 +52,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    document.body.style.backgroundColor = '#1e81b0';
+    document.body.style.backgroundColor = 'black';
     this.getMovie();
   }
 

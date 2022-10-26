@@ -8,6 +8,8 @@ const initialState: MovieState = {
   mostWatcedMovies: [],
   favMovies: [],
   genres: [],
+  SidebarCollections: [],
+  collection: undefined,
   isMostWatchedMoviesPage: false,
   isFavMoviesPage: false,
   isFavMovie: false,
@@ -109,9 +111,8 @@ export const movieReducer = createReducer(
 
   // -----------------------------------
   on(MovieActions.addFavMovie, (state, { uid }) => {
-    let favorites: Movie[] = JSON.parse(
-      localStorage.getItem(`favmovies_${uid}`)
-    ) || [];
+    let favorites: Movie[] =
+      JSON.parse(localStorage.getItem(`favmovies_${uid}`)) || [];
 
     localStorage.setItem(
       `favmovies_${uid}`,
@@ -144,7 +145,6 @@ export const movieReducer = createReducer(
     };
   }), // ----------------------
 
-
   // ----------------------------------
   on(MovieActions.getSearchedMovies, (state) => {
     return {
@@ -171,14 +171,68 @@ export const movieReducer = createReducer(
     };
   }),
 
-  on(MovieActions.clearSearchedMovies, (state)=>{
+  on(MovieActions.clearSearchedMovies, (state) => {
     return {
-        ...state,
-        findedMovies: []
-    }
+      ...state,
+      findedMovies: [],
+    };
   }), // ---------------------------
 
+  // ----------------------
+  on(MovieActions.getSideBarCollection, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
 
+  on(
+    MovieApiActions.getSideBarCollectionSuccessful,
+    (state, { collections }) => {
+      return {
+        ...state,
+        loading: false,
+        SidebarCollections: collections.filter(
+          (res) => res.poster && res.collectionId && res.movie_count && res.name
+        ),
+      };
+    }
+  ),
+
+  on(MovieApiActions.getSideBarCollectionFailed, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error,
+    };
+  }), // --------------------------------
+
+
+  // ----------------------------------------
+  on(MovieActions.getCollectionDetail, (state) => {
+    return {
+      ...state,
+      loading:true
+    }
+  }),
+
+  on(MovieApiActions.getCollectionDetailSuccessful, (state, {collection}) => {
+    return {
+      ...state,
+      loading:false,
+      collection
+    }
+  }),
+
+  on(MovieApiActions.getCollectionDetailFailed, (state, {error}) => {
+    return {
+      ...state,
+      loading:false,
+      error
+    }
+  }),
+
+  // -----------------------------------------
 
   //   ----------------------------
   on(MovieActions.clearAllState, (state) => {
@@ -186,6 +240,8 @@ export const movieReducer = createReducer(
       mostWatcedMovies: [],
       favMovies: [],
       genres: [],
+      SidebarCollections: [],
+      collection:undefined,
       isMostWatchedMoviesPage: false,
       isFavMoviesPage: false,
       isFavMovie: false,

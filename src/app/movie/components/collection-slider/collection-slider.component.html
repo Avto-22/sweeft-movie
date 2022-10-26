@@ -1,0 +1,9 @@
+<div class="main" *ngIf="collections$ | async as collections">
+  <div  id="carousel" #carousel [ngStyle]="{'--position': sliderPosition ? sliderPosition : collections.length / 2}">
+    <div class="item" *ngFor="let collection of (collections$ | async); let i = index" [ngStyle]="{'--offset': (i+1)}" >
+      <img  src="https://image.tmdb.org/t/p/w500{{collection.poster}}" (click)="changeSlide(i+1)"  alt="">
+      <button (click)="goToCollectionDetail(collection.collectionId)" *ngIf="sliderPosition ? (i+1) == sliderPosition : (i+1) == collections.length / 2" class="btn">See Collection</button>
+    </div>
+  </div>
+</div>
+

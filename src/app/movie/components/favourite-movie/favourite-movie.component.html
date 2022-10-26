@@ -1,2 +1,3 @@
+<app-collection-slider></app-collection-slider>
 <app-card  *ngIf="(movies$ | async)?.length != 0" [FavMovies]="movies$ | async" [isFavMovies]="true"></app-card>
 <div class="empty-favourite" *ngIf="!(movies$ | async)?.length">You have not Favouritemovies</div>

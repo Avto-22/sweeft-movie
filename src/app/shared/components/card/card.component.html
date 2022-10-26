@@ -58,6 +58,37 @@
       </div>
     </div>
   </div>
+  <div class="main" *ngIf="collectionMovies?.length">
+    <div class="container" *ngFor="let movie of collectionMovies">
+      <div class="card">
+         <div class="card__image-container">
+           <img class="card__image" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="" loading="lazy">
+        </div>
+          <svg class="card__svg" viewBox="0 0 400 500">
+            <path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500" stroke="transparent" style="height:100%" class="svg"/>
+            <path class="card__line" d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" stroke="pink" stroke-width="3" fill="transparent"/>
+          </svg>
+        <div class="center">
+          <button class="btn" (click)="goToDetails(movie.id)">
+            <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+              <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+              <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+            </svg>
+            <span>details</span>
+          </button>
+          <div *ngIf="movie.vote_average" class="imdb">imdb: {{movie.vote_average | imdb}}</div>
+          <div *ngIf="movie.release_date" class="date">{{movie.release_date.split('-')[0]}} Jahr</div>
+          <div class="genre">
+            <div *ngFor="let movie_genre of movie.genre_ids">
+              <p *ngFor="let genre of (genres$ | async)">
+                {{ genre.id == movie_genre ? genre.name : '' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="main" *ngIf="SearchMovies.length && isSearchmovies">
     <div class="container" *ngFor="let movie of SearchMovies">
       <div class="card">

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieComponent } from './movie.component';
 import { MovieRoutingModule } from './movie-routing.module';
-import { MovieApiService, BASE_URL, API_KEY } from './services/movie-api.service';
-import { environment } from 'src/environments/environment';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { HorizontalScrollDirective } from './components/movie-details/horizontal-scroll.directive';
 import { MostWatchedMovieListComponent } from './components/most-watched-movie-list/most-watched-movie-list.component';
@@ -13,23 +11,21 @@ import { MonthPipe } from '../shared/pipes/month.pipe';
 import { RuntimePipe } from '../shared/pipes/runtime.pipe';
 import { SafePipe } from '../shared/pipes/safe.pipe';
 import { TrailerComponent } from './components/movie-details/trailer/trailer.component';
+import { CollectionSliderComponent } from './components/collection-slider/collection-slider.component';
+import { SwiperModule } from 'swiper/angular';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { CollectionDetailComponent } from './components/collection-detail/collection-detail.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MovieRoutingModule,
-    SharedModule
+    SharedModule,
+    SwiperModule,
+    NgxSliderModule 
   ],
-  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent],
-  providers: [
-  //   MovieApiService, {
-  //   provide: BASE_URL,
-  //   useValue: environment.baseUrl
-  // },
-  // {
-  //   provide: API_KEY,
-  //   useValue: environment.apiKey
-  // }
-]
+  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent,CollectionSliderComponent, CollectionsComponent, CollectionDetailComponent],
+  providers: []
 })
 export class MovieModule { }

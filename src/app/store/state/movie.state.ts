@@ -1,9 +1,11 @@
-import { Genre, MovieDetail, MovieResult } from "src/app/movie/movie-model";
+import { CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
 
 export interface MovieState {
     mostWatcedMovies: MovieResult[];
     favMovies: MovieDetail[];
     movieDetail: MovieDetail;
+    collection: CollectionApiResponse;
+    SidebarCollections: SideBarCollectionDisplay[];
     isMostWatchedMoviesPage:boolean;
     isFavMoviesPage:boolean;
     isFavMovie:boolean;

@@ -20,7 +20,7 @@ export class FavouriteMovieComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    document.body.style.backgroundColor='#1e81b0';
+    document.body.style.backgroundColor='black';
     this.getMovies();
   }
 

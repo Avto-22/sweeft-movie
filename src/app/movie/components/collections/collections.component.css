@@ -1,0 +1,95 @@
+.main {
+  margin: 70px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 82vh;
+  width: 90vw;
+  border-radius: 10px;
+  /* border: 1px solid rgba(245, 222, 179, 0.425); */
+  /* background-color: rgba(0, 0, 0, 0.599); */
+  box-shadow: 0px 9px 15px 20px rgba(233, 232, 230, 0.456);
+  overflow-y: auto;
+}
+
+.main::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgb(12, 325, 125);
+}
+
+.collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: auto;
+  height: 85%;
+  padding: 50px;
+}
+
+.collection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.collection:hover img {
+  transform: scale(1.1);
+  z-index: 3;
+  box-shadow: 0px 9px 25px 20px rgba(255, 255, 255, 0.668);
+}
+
+.collection:hover .line-2 {
+  transform: scale(0.3);
+  background-color: aliceblue;
+}
+
+.collection:hover .line-1 {
+  transform: rotate(90deg) scale(0.3);
+  background-color: aliceblue;
+}
+
+.line {
+  width: 83%;
+  height: 3px;
+  position: absolute;
+  background-color: darkgoldenrod;
+  z-index: 3;
+}
+
+.line-1 {
+  transform: rotate(90deg);
+  z-index: 3;
+  transition: 0.4s;
+}
+
+.line-2 {
+  transition: 0.4s;
+}
+
+@media(max-width: 691px){
+  .collection {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media(max-width: 500px){
+  .line{
+    width: 40%;
+    height: 2px;
+  }
+}

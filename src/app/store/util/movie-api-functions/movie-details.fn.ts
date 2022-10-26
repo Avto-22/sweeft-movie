@@ -17,7 +17,6 @@ export class MovieDetailsFn {
   constructor(private movieApi: MovieApiService, private store: Store) {}
 
   getFullInfo$(id?: number, userUid?: string): Observable<MovieDetail> {
-    // if (id && userUid) {
     let favMovies: MovieResult[] = JSON.parse(
       localStorage.getItem(`favmovies_${userUid}`) || '[]'
     );
@@ -36,7 +35,7 @@ export class MovieDetailsFn {
         return movie;
       }),
       mergeMap((movie) => {
-        // ახალ observable-ზე გადაყვანა და MovieAndCast ტიპის გამოყვანა
+        // ახალ observable-ზე გადაყვანა 
         return this.movieApi.getMovieCast(movie.id).pipe(
           catchError(() =>
             of({

@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { MovieBody, Movie, CastBody, Genres, Trailer } from '../movie-model';
+import { Observable, of } from 'rxjs';
+import { MovieBody, Movie, CastBody, Genres, Trailer, CollectionApiResponse } from '../movie-model';
 
 export const BASE_URL = new InjectionToken<string>('api url');
 export const API_KEY = new InjectionToken<string>('api key');
@@ -39,6 +39,14 @@ export class MovieApiService {
 
   getMovieTrailer(movieId:number): Observable<Trailer>{
     return this.http.get<Trailer>(`${this.baseUrl}movie/${movieId}/videos?api_key=${this.apiKey}&language=en-US`)
+  }
+
+  getCollection(collecctionsId: number): Observable<CollectionApiResponse>{
+    return this.http.get<CollectionApiResponse>(this.baseUrl+'collection/' + collecctionsId +'?api_key='+this.apiKey);
+  }
+
+  getCollectionids(): Observable<number> {
+    return of<number>(10)
   }
 
 }

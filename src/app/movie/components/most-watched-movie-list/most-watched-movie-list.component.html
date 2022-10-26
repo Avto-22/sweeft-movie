@@ -1,1 +1,2 @@
+<app-collection-slider *ngIf="(page$ | async) == 1"></app-collection-slider>
 <app-card [MostWatchedmovies]="movies$ | async" [page]="page$ | async" [isMostWatchedMovie]="true"></app-card>

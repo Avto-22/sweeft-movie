@@ -73,6 +73,22 @@ export type MovieResultAndGenre = {
     genres: Genre[];
 };
 
+export interface SideBarCollectionDisplay {
+  collectionId:number;
+  poster:string;
+  name:string;
+  movie_count: number;
+  backdrop_path:string;
+};
+
+export interface CollectionApiResponse {
+  id:number;
+  poster_path:string;
+  name:string;
+  parts: MovieResult[];
+  backdrop_path:string;
+};
+
 export enum Month {
   'January',
   'February',

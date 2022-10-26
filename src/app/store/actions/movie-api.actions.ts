@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Genre, MovieDetail, MovieResult } from "src/app/movie/movie-model";
+import { CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
 
 // ------------ Start Most watched Movies
 export const getMostWatchedMoviesSuccessful = createAction(
@@ -51,3 +51,28 @@ export const getSearchedMoviesSuccessful =  createAction(
 export const getSearchedMoviesFailed =  createAction(
     '[header] get searched Movies failed'
 ); // ------------------------------------- End searched Movies
+
+
+
+// -------------- Start Slider Collection
+export const getSideBarCollectionSuccessful = createAction(
+'[] get Collection successful',
+props<{collections: SideBarCollectionDisplay[]}>()
+);
+
+export const getSideBarCollectionFailed = createAction(
+    '[] get Collection failed',
+    props<{error: string}>()
+);  // -------------- End Slider Collection
+
+
+// -------------------- Start Collection Detail
+export const getCollectionDetailSuccessful = createAction(
+    '[collection-details] get colection successful',
+    props<{collection: CollectionApiResponse}>()
+);
+
+export const getCollectionDetailFailed = createAction(
+    '[collection-details] get colection successful',
+    props<{error: string}>()
+); // ----------------------- End Collection Detail

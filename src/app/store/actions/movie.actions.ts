@@ -40,3 +40,12 @@ export const getSearchedMovies = createAction(
 export const clearSearchedMovies = createAction(
     '[header] clear searched movies'
 );
+
+export const getSideBarCollection = createAction(
+    '[] get collection'
+);
+
+export const getCollectionDetail = createAction(
+    '[collection-details] get colection detail',
+    props<{collectionId:number}>()
+);

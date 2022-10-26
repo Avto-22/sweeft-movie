@@ -1,0 +1,7 @@
+<div *ngIf="collection$ | async as collection" class="main">
+    <div class="background-image" [ngStyle]="{'background': 'url(https://image.tmdb.org/t/p/w500/' + collection.backdrop_path + ') no-repeat 0 0 / cover'}" >
+    </div>
+    <div class="movies">
+        <app-card [collectionMovies]="collection.parts"></app-card>
+    </div>
+</div>

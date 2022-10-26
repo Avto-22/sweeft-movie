@@ -3,6 +3,8 @@ import { RouterModule, Route} from '@angular/router';
 import { MovieComponent } from './movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { FavouriteMovieComponent } from './components/favourite-movie/favourite-movie.component';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { CollectionDetailComponent } from './components/collection-detail/collection-detail.component';
 
 const routes: Route[] = [
   {
@@ -16,6 +18,14 @@ const routes: Route[] = [
   {
     path: 'movie/:id',
     component: MovieDetailsComponent,
+  },
+  {
+    path: 'collections',
+    component: CollectionsComponent
+  },
+  {
+    path: 'collection/:collection_id',
+    component: CollectionDetailComponent
   }
 ];
 

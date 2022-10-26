@@ -13,7 +13,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    document.body.style.backgroundColor = '#1e81b0';
+    document.body.style.backgroundColor = 'black';
     document.body.style.backgroundImage = 'none';
   }
 
