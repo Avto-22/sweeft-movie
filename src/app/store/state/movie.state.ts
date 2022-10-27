@@ -1,4 +1,4 @@
-import { CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
+import { ActorAndPhilmography, CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
 
 export interface MovieState {
     mostWatcedMovies: MovieResult[];
@@ -17,4 +17,5 @@ export interface MovieState {
     genres: Genre[];
     isSearchedMovieFinded: boolean;
     findedMovies: MovieResult[];
+    actor: ActorAndPhilmography;
 }

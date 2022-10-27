@@ -83,3 +83,8 @@ export const selectCollection = createSelector(
     selectMovie,
     (state: MovieState) => state.collection
 );
+
+export const selectActor = createSelector(
+    selectMovie,
+    (state: MovieState) => state.actor
+);

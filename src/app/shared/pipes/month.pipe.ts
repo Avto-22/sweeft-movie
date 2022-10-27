@@ -10,7 +10,7 @@ export class MonthPipe implements PipeTransform {
     let month: string='';
     for(let i=1; i<=12; i++){
       if(i == parseInt(value)){
-        month = Month[i];
+        month = Month[i-1];
       }
     }
     return month;

@@ -22,6 +22,6 @@ export const EMPTY_MOVIE_DETAILS: MovieDetail = {
     title: '',
     vote_average: NaN,
     isFavorite: false,
-    casts: [{ character: '', name: '', profile_path: '' }],
+    casts: [{ character: '', name: '', profile_path: '', id:NaN, cast_id: NaN, credit_id: '' }],
     trailer_url: '',
   };

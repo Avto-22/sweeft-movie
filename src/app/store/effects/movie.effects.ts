@@ -11,6 +11,7 @@ import {
   SearchedMovies,
   SidebarCollections,
 } from '../util';
+import { Actor } from '../util/movie-api-functions/actor.fn';
 import { MovieDetailsFn } from '../util/movie-api-functions/movie-details.fn';
 
 const COLLECTIONS_ID: number[] = [
@@ -28,7 +29,8 @@ export class MovieEffects {
     private router: Router,
     private sarchedMovies: SearchedMovies,
     private sidebarCollections: SidebarCollections,
-    private collectionDetail: CollectionDetail
+    private collectionDetail: CollectionDetail,
+    private actor: Actor
   ) {}
 
   getMostWatchedMovies$ = createEffect(() => {
@@ -139,6 +141,25 @@ export class MovieEffects {
       catchError((error: HttpErrorResponse) => {
         return of(
           MovieApiActions.getCollectionDetailFailed({
+            error: `Failed to get Genres!: Server responded witch: ${error}`,
+          })
+        );
+      })
+    );
+  });
+
+  getActor = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MovieActions.getActorInfo),
+      mergeMap(({ personId }) => {
+        return this.actor.getActorInfo(personId);
+      }),
+      map((actor) => {
+        return MovieApiActions.getActorInfoSuccessful({ actor });
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(
+          MovieApiActions.getActorInfoFailed({
             error: `Failed to get Genres!: Server responded witch: ${error}`,
           })
         );

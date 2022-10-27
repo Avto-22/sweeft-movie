@@ -1,0 +1,34 @@
+<div class="start-animation" *ngIf="!isStartAnimationShowed && actor$ | async as actor">
+    <span *ngFor="let letter of actor.name.split(''); let i = index" [ngStyle]="{'animation-delay': '.'+(i+1)+'0s'}">{{letter}}</span>
+</div>
+<div class="main main-start-animation" *ngIf="isStartAnimationShowed && actor$ | async as actor">
+  <div class="actor-image">
+    <img
+      src="https://image.tmdb.org/t/p/w500/{{ actor.profile_path }}"
+      alt=""
+    />
+  </div>
+  <div class="actor-info">
+    <h3 *ngIf="actor.name" class="actor-name">{{ actor.name }}</h3>
+    <h3 *ngIf="actor.place_of_birth" class="birth-place">
+      <span>Birth place - </span>{{ actor.place_of_birth }}
+    </h3>
+    <h3 class="birthday" *ngIf="actor.birthday">
+      <span>Birthday - </span>{{ actor.birthday.split("-")[0] + " J, " }}
+      {{ actor.birthday.split("-")[2] + "" }}
+      {{ actor.birthday.split("-")[1] | month }}
+    </h3>
+    <h3 *ngIf="actor.deathday" class="deathday">
+        <span>Deathday - </span>{{ actor.deathday.split("-")[0] + " J, " }}
+        {{ actor.deathday.split("-")[2] + "" }}
+        {{ actor.deathday.split("-")[1] | month }}
+      </h3>
+    <p *ngIf="actor.biography" class="biography">{{ actor.biography }}</p>
+  </div>
+</div>
+<div class="philmography"  *ngIf="isStartAnimationShowed && actor$ | async as actor">
+    <button class="btn" (click)="showPhilmography()">See {{actor.name}} 's philmography</button>
+    <div class="movie" *ngIf="isShowPhilmographyClicked">
+        <app-card [movies]="actor.movies"></app-card>
+    </div>
+</div>

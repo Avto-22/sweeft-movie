@@ -5,6 +5,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 import { FavouriteMovieComponent } from './components/favourite-movie/favourite-movie.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { CollectionDetailComponent } from './components/collection-detail/collection-detail.component';
+import { ActorComponent } from './components/actor/actor.component';
 
 const routes: Route[] = [
   {
@@ -26,6 +27,10 @@ const routes: Route[] = [
   {
     path: 'collection/:collection_id',
     component: CollectionDetailComponent
+  },
+  {
+    path: 'actor/:actor_id',
+    component: ActorComponent
   }
 ];
 

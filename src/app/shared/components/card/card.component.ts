@@ -19,7 +19,7 @@ import { Genre, Movie, MovieResult } from '../../../movie/movie-model';
 })
 export class CardComponent implements OnInit {
   @Input() MostWatchedmovies: MovieResult[] = [];
-  @Input() collectionMovies: MovieResult[] = [];
+  @Input() movies: MovieResult[] = [];
   @Input() FavMovies: Movie[] = [];
   @Input() SearchMovies: MovieResult[] = [];
   @Input() page: number = 1;

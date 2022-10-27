@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
+import { ActorAndPhilmography, CollectionApiResponse, Genre, MovieDetail, MovieResult, SideBarCollectionDisplay } from "src/app/movie/movie-model";
 
 // ------------ Start Most watched Movies
 export const getMostWatchedMoviesSuccessful = createAction(
@@ -76,3 +76,15 @@ export const getCollectionDetailFailed = createAction(
     '[collection-details] get colection successful',
     props<{error: string}>()
 ); // ----------------------- End Collection Detail
+
+
+// ---------------------------- Start Actor's info
+export const getActorInfoSuccessful = createAction(
+    '[Actor] get Actors info successful',
+    props<{actor: ActorAndPhilmography}>()
+);
+
+export const getActorInfoFailed = createAction(
+    '[Actor] get Actors info failed',
+    props<{error: string}>()
+); // ---------------------- End Actor's info

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { MovieActions } from 'src/app/store/actions';
 import { MovieSelector } from 'src/app/store/selectors';
 import { CollectionApiResponse } from '../../movie-model';
-import { MovieApiService } from '../../services/movie-api.service';
 
 @Component({
   selector: 'app-collection-detail',

@@ -31,7 +31,7 @@
         
         <div class="cast"  #cast HorizontalScroll *ngIf="movie?.casts?.length">
           <div class="actor" *ngFor="let actor of movie.casts">
-            <p class="actor-name">{{actor.name}}</p>
+            <p class="actor-name" title="see {{actor.name}}'s infotmation" (click)="actorDetails(actor.id)">{{actor.name}}</p>
             <div class="actor-img">
               <img src="https://image.tmdb.org/t/p/w500{{actor.profile_path}}" loading="lazy" alt="">
               <div class="character">

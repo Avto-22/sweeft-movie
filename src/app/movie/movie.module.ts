@@ -16,6 +16,7 @@ import { SwiperModule } from 'swiper/angular';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { CollectionDetailComponent } from './components/collection-detail/collection-detail.component';
+import { ActorComponent } from './components/actor/actor.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { CollectionDetailComponent } from './components/collection-detail/collec
     SwiperModule,
     NgxSliderModule 
   ],
-  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent,CollectionSliderComponent, CollectionsComponent, CollectionDetailComponent],
+  declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent,CollectionSliderComponent, CollectionsComponent, CollectionDetailComponent, ActorComponent],
   providers: []
 })
 export class MovieModule { }

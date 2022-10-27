@@ -5,7 +5,7 @@ import {
   ViewChild,
   OnDestroy,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieDetail } from '../../movie-model';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -48,7 +48,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     public facadeService: MovieDetailsFacadeService,
     private authService: AuthService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -81,6 +82,10 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+  }
+
+  actorDetails(actorId:number){
+    this.router.navigate(['movie-list/actor/' + actorId])
   }
 
   next() {

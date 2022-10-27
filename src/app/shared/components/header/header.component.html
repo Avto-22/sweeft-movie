@@ -11,7 +11,7 @@
           class="nav-bar-item"
           [ngClass]="{
             active:
-              !router.url.includes('favourite-movie') && !router.url.includes('collections') &&
+              !router.url.includes('favourite-movie') && !router.url.includes('collection') && !router.url.includes('actor') &&
               (router.url.includes('page') ||
                 router.url.split('/')[1] == 'movie-list') && !router.url.includes('movie/')
           }"

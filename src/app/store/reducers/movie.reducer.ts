@@ -21,6 +21,7 @@ const initialState: MovieState = {
   movieDetail: EMPTY_MOVIE_DETAILS,
   isSearchedMovieFinded: true,
   findedMovies: [],
+  actor: undefined
 };
 
 export const movieReducer = createReducer(
@@ -230,9 +231,33 @@ export const movieReducer = createReducer(
       loading:false,
       error
     }
+  }), // -----------------------------------------
+
+
+  //  ---------------------------
+  on(MovieActions.getActorInfo, (state)=>{
+    return {
+      ...state,
+      loading:true
+    }
   }),
 
-  // -----------------------------------------
+  on(MovieApiActions.getActorInfoSuccessful, (state, {actor}) => {
+    return {
+      ...state,
+      loading:false,
+      actor
+    }
+  }),
+
+  on(MovieApiActions.getActorInfoFailed, (state, {error}) => {
+    return {
+      ...state,
+      loading:false,
+      error
+    }
+  }), // ---------------------------------------------
+
 
   //   ----------------------------
   on(MovieActions.clearAllState, (state) => {
@@ -256,6 +281,7 @@ export const movieReducer = createReducer(
       },
       isSearchedMovieFinded: true,
       findedMovies: [],
+      actor:undefined
     };
   })
 );

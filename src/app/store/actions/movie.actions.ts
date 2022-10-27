@@ -49,3 +49,8 @@ export const getCollectionDetail = createAction(
     '[collection-details] get colection detail',
     props<{collectionId:number}>()
 );
+
+export const getActorInfo = createAction(
+    '[Actor] get Actors info',
+    props<{personId: number}>()
+);

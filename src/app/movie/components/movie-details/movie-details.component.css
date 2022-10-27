@@ -288,6 +288,16 @@
 
 .actor .actor-name {
   text-align: center;
+  padding: 5px;
+  border: 1px solid gold;
+  transition: .4s;
+  border-radius: 10px;
+}
+
+.actor .actor-name:hover{
+  border-color: white;
+  color: gold;
+  transform: scale(1.1);
 }
 
 .buttons {
@@ -329,7 +339,7 @@
 }
 
 .error p{
-  color:black;
+  color:white;
   font-weight: bolder;
   font-size: 1.5rem;
   opacity: .3;

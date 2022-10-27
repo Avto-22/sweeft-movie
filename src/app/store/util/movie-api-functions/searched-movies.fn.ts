@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { mergeMap, Observable, of } from 'rxjs';
-import { MovieBody, MovieResult } from 'src/app/movie/movie-model';
+import { MovieResult } from 'src/app/movie/movie-model';
 import { MovieApiService } from 'src/app/movie/services/movie-api.service';
 
 @Injectable({

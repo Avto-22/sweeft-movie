@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
   ) {}
 
   ngOnInit() {
-    document.body.style.backgroundColor = 'black'
+    document.body.style.backgroundColor = 'black';
   }
 
   ngAfterContentChecked(): void {
