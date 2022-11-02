@@ -66,7 +66,7 @@ export class ActorComponent implements OnInit, OnDestroy {
           return {
             ...res,
             movies: res.movies.filter((movie) =>
-              movie.title.toLowerCase().includes(movieName.toLowerCase())
+              movie.title.toLowerCase().replace( /\s/g, '').includes(movieName.toLowerCase().replace( /\s/g, ''))
             ),
           };
         })
