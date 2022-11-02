@@ -33,7 +33,6 @@ export class AuthComponent implements OnInit {
     document.body.style.backgroundRepeat = 'repeat';
     this.createSignInForm();
     this.createSignUpForm();
-
     this.store.dispatch(MovieActions.clearAllState())
   }
 

@@ -54,13 +54,23 @@
   cursor: pointer;
 }
 
-#sign-in .title {
+#sign-up .title, #sign-in .title{
+  border: 1px solid white;
+  color: white;
+  margin-left: -1px;
+}
+
+#sign-up .title{
+  color: #03e9f4;
+}
+
+/* #sign-in .title {
   background-color: rgba(255, 255, 255, 0.685);
 }
 
 #sign-up .title {
   background-color: rgba(127, 255, 212, 0.678);
-}
+} */
 
 .top {
   transform: translateY(0px);
@@ -105,22 +115,24 @@
   border-style: none none solid none;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
+  font-family: cursive;
+  font-size: larger;
 }
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: white;
+  color: gray;
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: white;
+  color: gray;
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: white;
+  color: gray;
 }
 
 .butt {
