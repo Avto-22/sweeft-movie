@@ -15,11 +15,6 @@ export class SweetAlertService {
       showConfirmButton: false,
       background:'black',
       color:'white',
-      timer: 3000,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
     })
     
     Toast.fire({

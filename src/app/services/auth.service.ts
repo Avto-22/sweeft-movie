@@ -77,7 +77,7 @@ export class AuthService {
           this.router.navigate(['movie-list']);
         },
         (error) => {
-          throw 'Invalid Userinfo';
+          throw `Invalid Userinfo or The email address is already in use by another account`;
         }
       )
       .catch((error) => {
