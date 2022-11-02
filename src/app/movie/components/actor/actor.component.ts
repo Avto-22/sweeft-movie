@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   OnDestroy,
   OnInit,
@@ -8,7 +7,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, Observable, pipe, Subject, takeUntil, tap } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { MovieActions } from 'src/app/store/actions';
 import { MovieSelector } from 'src/app/store/selectors';
 import { ActorAndPhilmography } from '../../movie-model';
