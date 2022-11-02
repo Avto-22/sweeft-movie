@@ -17,6 +17,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { CollectionDetailComponent } from './components/collection-detail/collection-detail.component';
 import { ActorComponent } from './components/actor/actor.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ActorComponent } from './components/actor/actor.component';
     MovieRoutingModule,
     SharedModule,
     SwiperModule,
-    NgxSliderModule 
+    NgxSliderModule,
+    FormsModule
   ],
   declarations: [MovieComponent, MovieDetailsComponent, HorizontalScrollDirective, MostWatchedMovieListComponent, FavouriteMovieComponent, MonthPipe, RuntimePipe, SafePipe, TrailerComponent,CollectionSliderComponent, CollectionsComponent, CollectionDetailComponent, ActorComponent],
   providers: []

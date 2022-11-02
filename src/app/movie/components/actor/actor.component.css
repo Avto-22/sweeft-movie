@@ -112,7 +112,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .philmography .btn{
@@ -128,6 +127,28 @@
     opacity: 0;
     animation: Philmography .1s forwards;
     animation-delay: .3s;
+}
+
+.movie{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie .search{
+    all: unset;
+    padding: 10px;
+    border-radius: 5px;
+    border-bottom: 1px solid white;
+    margin-top: 40px;
+    font-size: larger;
+    font-family: cursive;
+}
+
+.movie .search::placeholder{
+    font-size: larger;
+    font-family: cursive;
 }
 
 @keyframes Philmography{

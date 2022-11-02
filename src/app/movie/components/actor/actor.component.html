@@ -27,8 +27,11 @@
   </div>
 </div>
 <div class="philmography"  *ngIf="isStartAnimationShowed && actor$ | async as actor">
-    <button class="btn" (click)="showPhilmography()">See {{actor.name}} 's philmography</button>
+    <button class="btn" (click)="showPhilmography()" (click)="startSearch()">See {{actor.name}} 's filmography</button>
     <div class="movie" *ngIf="isShowPhilmographyClicked">
+      <form #form="ngForm">
+        <input ngModel name="search" class="search" type="text" placeholder="search movie" autocomplete="off">
+      </form>
         <app-card [movies]="actor.movies"></app-card>
     </div>
 </div>
